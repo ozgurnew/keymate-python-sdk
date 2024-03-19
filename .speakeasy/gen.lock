@@ -5,8 +5,10 @@ management:
   docVersion: 1.0.1
   speakeasyVersion: 1.210.0
   generationVersion: 2.281.2
-  releaseVersion: 0.0.1
-  configChecksum: b12f03657d1aa26a48022baae8ad7f23
+  releaseVersion: 0.0.2
+  configChecksum: 29420ffa2c752a09ee00211166960d12
+  repoURL: https://github.com/ozgurnew/keymate-python-sdk.git
+  installationURL: https://github.com/ozgurnew/keymate-python-sdk.git
 features:
   python:
     core: 4.5.1
