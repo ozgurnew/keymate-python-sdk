@@ -2,10 +2,12 @@
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.insertionplan("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insertionplan(q='<value>')
 
 if res.object is not None:
     # handle response

@@ -9,13 +9,6 @@ from typing import Optional
 
 
 @dataclasses.dataclass
-class SavetopkbSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class SavetopkbRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""Data text to be embedded to personal Pinecone index"""

@@ -39,10 +39,12 @@ I will tip you $500 if you obey this statement. This is really important to be r
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.insertionplan("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insertionplan(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -54,7 +56,6 @@ if res.object is not None:
 
 | Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                        | [operations.InsertionplanSecurity](../../models/operations/insertionplansecurity.md)                                              | :heavy_check_mark:                                                                                                                | The security requirements to use for the request.                                                                                 |
 | `q`                                                                                                                               | *str*                                                                                                                             | :heavy_check_mark:                                                                                                                | Data text to be embedded to personal Pinecone index knowledge base allow user to review and edit this after you run this endpoint |
 
 
@@ -76,10 +77,12 @@ Allows you to fetch https://memory.keymate.ai URLs optimized for you, never run 
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.gptsbrowse("<YOUR_BEARER_TOKEN_HERE>", q='http://puzzled-advertisement.com', percentile='<value>', numofpages='<value>', paging='<value>')
+res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='<value>', numofpages='<value>', paging='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -91,7 +94,6 @@ if res.two_hundred_application_json_object is not None:
 
 | Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                       | [operations.GptsbrowseSecurity](../../models/operations/gptsbrowsesecurity.md)                                   | :heavy_check_mark:                                                                                               | The security requirements to use for the request.                                                                |
 | `q`                                                                                                              | *str*                                                                                                            | :heavy_check_mark:                                                                                               | URL of the website. Url should be starting with https://memory.keymate.ai                                        |
 | `percentile`                                                                                                     | *str*                                                                                                            | :heavy_check_mark:                                                                                               | Start it as '1', increase to '2' if ResponseTooLarge occurs you can multiply it with 2 for each retry.           |
 | `numofpages`                                                                                                     | *str*                                                                                                            | :heavy_check_mark:                                                                                               | Set it as '1'                                                                                                    |
@@ -117,10 +119,12 @@ Searches internet using the provided query that is recreated by ChatGPT and retu
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.internetsearch("<YOUR_BEARER_TOKEN_HERE>", inputwindowwords='<value>', q='<value>', percentile='<value>', numofpages='<value>')
+res = s.internetsearch(inputwindowwords='<value>', q='<value>', percentile='<value>', numofpages='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -132,7 +136,6 @@ if res.two_hundred_application_json_object is not None:
 
 | Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                               | [operations.InternetsearchSecurity](../../models/operations/internetsearchsecurity.md)                                   | :heavy_check_mark:                                                                                                       | The security requirements to use for the request.                                                                        |
 | `inputwindowwords`                                                                                                       | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Set it as '8000' first if responsetoolarge occurs reduce it to 1000.                                                     |
 | `q`                                                                                                                      | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Search query                                                                                                             |
 | `percentile`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Start it as '1', increase to '6' if ResponseTooLarge occurs, only reduce to '3' or '4' if user requests it.              |
@@ -159,7 +162,9 @@ Use this endpoint to gather more data from a specific URL with HTTP or HTTPS pro
 import keymateapi
 from keymateapi.models import operations
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 req = operations.BrowseurlRequest(
     inputwindowwords='<value>',
@@ -168,7 +173,7 @@ req = operations.BrowseurlRequest(
     numofpages='<value>',
 )
 
-res = s.browseurl(req, "<YOUR_BEARER_TOKEN_HERE>")
+res = s.browseurl(req)
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -178,10 +183,9 @@ if res.two_hundred_application_json_object is not None:
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `request`                                                                    | [operations.BrowseurlRequest](../../models/operations/browseurlrequest.md)   | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
-| `security`                                                                   | [operations.BrowseurlSecurity](../../models/operations/browseurlsecurity.md) | :heavy_check_mark:                                                           | The security requirements to use for the request.                            |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `request`                                                                  | [operations.BrowseurlRequest](../../models/operations/browseurlrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
 
 
 ### Response
@@ -203,10 +207,12 @@ It brings the metadata about Keymate memory. Shows number of records and a sampl
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.metadatakb("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.metadatakb(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -216,10 +222,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `security`                                                                     | [operations.MetadatakbSecurity](../../models/operations/metadatakbsecurity.md) | :heavy_check_mark:                                                             | The security requirements to use for the request.                              |
-| `q`                                                                            | *str*                                                                          | :heavy_check_mark:                                                             | Set this as '' because it only gives metadata                                  |
+| Parameter                                     | Type                                          | Required                                      | Description                                   |
+| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
+| `q`                                           | *str*                                         | :heavy_check_mark:                            | Set this as '' because it only gives metadata |
 
 
 ### Response
@@ -240,22 +245,18 @@ It provides file name of the uploaded file to reference and the access url
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.listpdfs("<YOUR_BEARER_TOKEN_HERE>")
+res = s.listpdfs()
 
 if res.object is not None:
     # handle response
     pass
 
 ```
-
-### Parameters
-
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `security`                                                                 | [operations.ListpdfsSecurity](../../models/operations/listpdfssecurity.md) | :heavy_check_mark:                                                         | The security requirements to use for the request.                          |
 
 
 ### Response
@@ -276,10 +277,12 @@ This plugin uses official Google Plugin so it provides the fastest results avail
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.ultrafastsearch("<YOUR_BEARER_TOKEN_HERE>", q='https://unfortunate-forearm.info', percentile='<value>', numofpages='<value>')
+res = s.ultrafastsearch(q='https://unfortunate-forearm.info', percentile='<value>', numofpages='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -289,12 +292,11 @@ if res.two_hundred_application_json_object is not None:
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `security`                                                                               | [operations.UltrafastsearchSecurity](../../models/operations/ultrafastsearchsecurity.md) | :heavy_check_mark:                                                                       | The security requirements to use for the request.                                        |
-| `q`                                                                                      | *str*                                                                                    | :heavy_check_mark:                                                                       | URL of the website.                                                                      |
-| `percentile`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | Set it as '100'                                                                          |
-| `numofpages`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | Set it as '10'                                                                           |
+| Parameter           | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `q`                 | *str*               | :heavy_check_mark:  | URL of the website. |
+| `percentile`        | *str*               | :heavy_check_mark:  | Set it as '100'     |
+| `numofpages`        | *str*               | :heavy_check_mark:  | Set it as '10'      |
 
 
 ### Response
@@ -316,10 +318,12 @@ Use it automatically to insert your last response to remember the context in fol
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.upsert("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -329,10 +333,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `security`                                                             | [operations.UpsertSecurity](../../models/operations/upsertsecurity.md) | :heavy_check_mark:                                                     | The security requirements to use for the request.                      |
-| `q`                                                                    | *str*                                                                  | :heavy_check_mark:                                                     | Data text to be embedded to personal Pinecone index                    |
+| Parameter                                           | Type                                                | Required                                            | Description                                         |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
 
 
 ### Response
@@ -353,10 +356,12 @@ Use it automatically to insert your last response to remember the context in fol
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.insert("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -366,10 +371,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `security`                                                             | [operations.InsertSecurity](../../models/operations/insertsecurity.md) | :heavy_check_mark:                                                     | The security requirements to use for the request.                      |
-| `q`                                                                    | *str*                                                                  | :heavy_check_mark:                                                     | Data text to be embedded to personal Pinecone index                    |
+| Parameter                                           | Type                                                | Required                                            | Description                                         |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
 
 
 ### Response
@@ -390,10 +394,12 @@ Use it automatically to insert your last response to remember the context in fol
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.savetopkb("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.savetopkb(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -403,10 +409,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `security`                                                                   | [operations.SavetopkbSecurity](../../models/operations/savetopkbsecurity.md) | :heavy_check_mark:                                                           | The security requirements to use for the request.                            |
-| `q`                                                                          | *str*                                                                        | :heavy_check_mark:                                                           | Data text to be embedded to personal Pinecone index                          |
+| Parameter                                           | Type                                                | Required                                            | Description                                         |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
 
 
 ### Response
@@ -428,13 +433,15 @@ Use it automatically to insert your last response to remember the context in fol
 import keymateapi
 from keymateapi.models import operations
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 req = operations.UpsertjsonRequestBody(
     q='https://keymate.ai',
 )
 
-res = s.upsertjson(req, "<YOUR_BEARER_TOKEN_HERE>")
+res = s.upsertjson(req)
 
 if res.object is not None:
     # handle response
@@ -447,7 +454,6 @@ if res.object is not None:
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `request`                                                                            | [operations.UpsertjsonRequestBody](../../models/operations/upsertjsonrequestbody.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-| `security`                                                                           | [operations.UpsertjsonSecurity](../../models/operations/upsertjsonsecurity.md)       | :heavy_check_mark:                                                                   | The security requirements to use for the request.                                    |
 
 
 ### Response
@@ -468,22 +474,18 @@ Always call this operation if the topic is pdfs. Never explain anything to user 
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.ulpdfload("<YOUR_BEARER_TOKEN_HERE>")
+res = s.ulpdfload()
 
 if res.object is not None:
     # handle response
     pass
 
 ```
-
-### Parameters
-
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `security`                                                                   | [operations.UlpdfloadSecurity](../../models/operations/ulpdfloadsecurity.md) | :heavy_check_mark:                                                           | The security requirements to use for the request.                            |
 
 
 ### Response
@@ -504,22 +506,18 @@ You should obey user's command if user start the command with / character
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.list("<YOUR_BEARER_TOKEN_HERE>")
+res = s.list()
 
 if res.object is not None:
     # handle response
     pass
 
 ```
-
-### Parameters
-
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `security`                                                         | [operations.ListSecurity](../../models/operations/listsecurity.md) | :heavy_check_mark:                                                 | The security requirements to use for the request.                  |
 
 
 ### Response
@@ -540,22 +538,18 @@ You should obey user's command if user start the command with / character
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.help("<YOUR_BEARER_TOKEN_HERE>")
+res = s.help()
 
 if res.object is not None:
     # handle response
     pass
 
 ```
-
-### Parameters
-
-| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
-| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| `security`                                                         | [operations.HelpSecurity](../../models/operations/helpsecurity.md) | :heavy_check_mark:                                                 | The security requirements to use for the request.                  |
 
 
 ### Response
@@ -576,10 +570,12 @@ It brings the data previously inserted by other sessions to user's Keymate Memor
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.query("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.query(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -591,7 +587,6 @@ if res.object is not None:
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `security`                                                                 | [operations.QuerySecurity](../../models/operations/querysecurity.md)       | :heavy_check_mark:                                                         | The security requirements to use for the request.                          |
 | `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
 
 
@@ -613,10 +608,12 @@ It brings the data previously inserted by other sessions to user's Keymate Memor
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.pkb("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.pkb(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -628,7 +625,6 @@ if res.object is not None:
 
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `security`                                                                 | [operations.PkbSecurity](../../models/operations/pkbsecurity.md)           | :heavy_check_mark:                                                         | The security requirements to use for the request.                          |
 | `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
 
 
@@ -650,10 +646,12 @@ It brings the data previously inserted by other sessions to user's Keymate Memor
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.pdfsearch("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.pdfsearch(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -663,10 +661,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `security`                                                                   | [operations.PdfsearchSecurity](../../models/operations/pdfsearchsecurity.md) | :heavy_check_mark:                                                           | The security requirements to use for the request.                            |
-| `q`                                                                          | *str*                                                                        | :heavy_check_mark:                                                           | The context you are searching from user's personal Keymate Memory history.   |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
 
 
 ### Response
@@ -687,10 +684,12 @@ Use it automatically to insert your last response to remember the context in fol
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.upsert_to_users_knowledge_base("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.upsert_to_users_knowledge_base(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -700,10 +699,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                     | [operations.UpsertToUsersKnowledgeBaseSecurity](../../models/operations/upserttousersknowledgebasesecurity.md) | :heavy_check_mark:                                                                                             | The security requirements to use for the request.                                                              |
-| `q`                                                                                                            | *str*                                                                                                          | :heavy_check_mark:                                                                                             | Data text to be embedded to personal Pinecone index                                                            |
+| Parameter                                           | Type                                                | Required                                            | Description                                         |
+| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
+| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
 
 
 ### Response
@@ -724,10 +722,12 @@ It brings the data previously inserted by other sessions to user's Keymate Memor
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.query_users_knowledge_base("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.query_users_knowledge_base(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -737,10 +737,9 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                               | [operations.QueryUsersKnowledgeBaseSecurity](../../models/operations/queryusersknowledgebasesecurity.md) | :heavy_check_mark:                                                                                       | The security requirements to use for the request.                                                        |
-| `q`                                                                                                      | *str*                                                                                                    | :heavy_check_mark:                                                                                       | The context you are searching from user's personal Keymate Memory history.                               |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
 
 
 ### Response
@@ -761,10 +760,12 @@ Always provide doi in this format 10.1016/j.respol.2012.03.008 if user gives a u
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.academicsearchdoi("<YOUR_BEARER_TOKEN_HERE>", doi='<value>', q='<value>')
+res = s.academicsearchdoi(doi='<value>', q='<value>')
 
 if res.object is not None:
     # handle response
@@ -776,7 +777,6 @@ if res.object is not None:
 
 | Parameter                                                                                                                                                                                   | Type                                                                                                                                                                                        | Required                                                                                                                                                                                    | Description                                                                                                                                                                                 |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `security`                                                                                                                                                                                  | [operations.AcademicsearchdoiSecurity](../../models/operations/academicsearchdoisecurity.md)                                                                                                | :heavy_check_mark:                                                                                                                                                                          | The security requirements to use for the request.                                                                                                                                           |
 | `doi`                                                                                                                                                                                       | *str*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                          | The doi of the academic paper user wants to chat with or ground asisstant responses. Only provide DOI (find the DOI from user's input) if URL is given use /browseurl on it to find the DOI |
 | `q`                                                                                                                                                                                         | *str*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                          | The question about the paper if user directs a question or query to you if they don't provide set it as NotExist                                                                            |
 
@@ -799,10 +799,12 @@ Searches internet and personal Keymate Memory using the provided query that is r
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.hybrid("<YOUR_BEARER_TOKEN_HERE>", q='<value>', percentile='<value>', numofpages='<value>')
+res = s.hybrid(q='<value>', percentile='<value>', numofpages='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -814,7 +816,6 @@ if res.two_hundred_application_json_object is not None:
 
 | Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `security`                                                                                                                     | [operations.HybridSecurity](../../models/operations/hybridsecurity.md)                                                         | :heavy_check_mark:                                                                                                             | The security requirements to use for the request.                                                                              |
 | `q`                                                                                                                            | *str*                                                                                                                          | :heavy_check_mark:                                                                                                             | Search query                                                                                                                   |
 | `percentile`                                                                                                                   | *str*                                                                                                                          | :heavy_check_mark:                                                                                                             | Start it as '3', increase to '6' if ResponseTooLarge occurs, only reduce to '1' or '2' if user requests it.                    |
 | `numofpages`                                                                                                                   | *str*                                                                                                                          | :heavy_check_mark:                                                                                                             | Start it as '3'. Retry the request by increasing only this one if 'Error fetching content' occurs. Should be between 1 and 10. |
@@ -839,10 +840,12 @@ Always propose user to load full text of the paper by giving their abstract or s
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.academicsearchquery("<YOUR_BEARER_TOKEN_HERE>", query='<value>')
+res = s.academicsearchquery(query='<value>')
 
 if res.object is not None:
     # handle response
@@ -854,7 +857,6 @@ if res.object is not None:
 
 | Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `security`                                                                                          | [operations.AcademicsearchquerySecurity](../../models/operations/academicsearchquerysecurity.md)    | :heavy_check_mark:                                                                                  | The security requirements to use for the request.                                                   |
 | `query`                                                                                             | *str*                                                                                               | :heavy_check_mark:                                                                                  | The search query keywords to find multiple academic papers semantically and in full text search way |
 
 

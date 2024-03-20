@@ -20,7 +20,7 @@ It has been generated successfully based on your OpenAPI spec. However, it is no
 ## SDK Installation
 
 ```bash
-pip install git+https://github.com/ozgurnew/keymate-python-sdk.git
+pip install keymateapi
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -32,10 +32,12 @@ pip install git+https://github.com/ozgurnew/keymate-python-sdk.git
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.insertionplan("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insertionplan(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -89,12 +91,14 @@ Handling errors in this SDK should largely match your expectations.  All operati
 import keymateapi
 from keymateapi.models import errors
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
 res = None
 try:
-    res = s.gptsbrowse("<YOUR_BEARER_TOKEN_HERE>", q='http://puzzled-advertisement.com', percentile='<value>', numofpages='<value>', paging='<value>')
+    res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='<value>', numofpages='<value>', paging='<value>')
 except errors.GptsbrowseResponseBody as e:
     # handle exception
     raise(e)
@@ -127,10 +131,11 @@ import keymateapi
 
 s = keymateapi.Keymateapi(
     server_idx=0,
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
-res = s.insertionplan("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insertionplan(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -147,10 +152,11 @@ import keymateapi
 
 s = keymateapi.Keymateapi(
     server_url="https://server.searchweb.keymate.ai",
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
-res = s.insertionplan("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insertionplan(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -187,18 +193,15 @@ This SDK supports the following security scheme globally:
 | `bearer_auth` | http          | HTTP Bearer   |
 
 To authenticate with the API the `bearer_auth` parameter must be set when initializing the SDK client instance. For example:
-
-
-### Per-Operation Security Schemes
-
-Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```python
 import keymateapi
 
-s = keymateapi.Keymateapi()
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
 
 
-res = s.insertionplan("<YOUR_BEARER_TOKEN_HERE>", q='<value>')
+res = s.insertionplan(q='<value>')
 
 if res.object is not None:
     # handle response

@@ -9,13 +9,6 @@ from typing import Any, List, Optional
 
 
 @dataclasses.dataclass
-class PkbSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class PkbRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""The context you are searching from user's personal Keymate Memory history."""
