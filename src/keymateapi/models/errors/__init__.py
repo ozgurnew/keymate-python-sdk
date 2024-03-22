@@ -5,5 +5,6 @@ from .browseurl import *
 from .gptsbrowse import *
 from .internetsearch import *
 from .sdkerror import *
+from .search import *
 
-__all__ = ["BrowseResponseBody","BrowseResponseResponseBody","BrowseurlResponseBody","GptsbrowseResponseBody","GptsbrowseResponseResponseBody","InternetsearchResponseBody","InternetsearchResponseResponseBody","SDKError"]
+__all__ = ["BrowseResponseBody","BrowseResponseResponseBody","BrowseurlResponseBody","GptsbrowseResponseBody","GptsbrowseResponseResponseBody","InternetsearchResponseBody","InternetsearchResponseResponseBody","SDKError","SearchResponseBody","SearchResponseResponseBody"]

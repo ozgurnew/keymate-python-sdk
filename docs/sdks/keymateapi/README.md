@@ -11,6 +11,7 @@ Keymate.AI Web Search API: Enhances knowledge grounded responses by fetching URL
 * [query](#query) - Queries the user's Keymate Memory.
 * [browseurl](#browseurl) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
 * [browse](#browse) - Fetch any URLs without proxy it would probably fail on major websites but quicker than browseurl 
+* [search](#search) - Without proxies searches keyword on the internet and fetches urls and optimizes output
 * [gptsbrowse](#gptsbrowse) - Fetch memory.keymate.ai URLs
 * [internetsearch](#internetsearch) - Conduct an internet search
 
@@ -177,6 +178,48 @@ if res.two_hundred_application_json_object is not None:
 | --------------------------------- | --------------------------------- | --------------------------------- |
 | errors.BrowseResponseBody         | 400                               | application/json                  |
 | errors.BrowseResponseResponseBody | 401                               | application/json                  |
+| errors.SDKError                   | 4x-5xx                            | */*                               |
+
+## search
+
+Searches web using google and fetches URLs optimized for non heavily guarded websites
+
+### Example Usage
+
+```python
+import keymateapi
+
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
+
+
+res = s.search(q='http://fake-flume.name', percentile='1', numofpages='1')
+
+if res.two_hundred_application_json_object is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `q`                                                                              | *str*                                                                            | :heavy_check_mark:                                                               | URL starting with https://memory.keymate.ai. Must be a valid URL.                |                                                                                  |
+| `percentile`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | For adjusting response scope in case of 'ResponseTooLarge' error. Starts with 1. | 1                                                                                |
+| `numofpages`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | Specifies the number of pages to return. Starts with 1 by default.               | 1                                                                                |
+
+
+### Response
+
+**[operations.SearchResponse](../../models/operations/searchresponse.md)**
+### Errors
+
+| Error Object                      | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.SearchResponseBody         | 400                               | application/json                  |
+| errors.SearchResponseResponseBody | 401                               | application/json                  |
 | errors.SDKError                   | 4x-5xx                            | */*                               |
 
 ## gptsbrowse
