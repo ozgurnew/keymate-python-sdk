@@ -56,6 +56,7 @@ if res.object is not None:
 * [browseurl](docs/sdks/keymateapi/README.md#browseurl) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
 * [browse](docs/sdks/keymateapi/README.md#browse) - Fetch any URLs without proxy it would probably fail on major websites but quicker than browseurl 
 * [search](docs/sdks/keymateapi/README.md#search) - Without proxies searches keyword on the internet and fetches urls and optimizes output
+* [ultrafastsearch](docs/sdks/keymateapi/README.md#ultrafastsearch) - This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
 * [gptsbrowse](docs/sdks/keymateapi/README.md#gptsbrowse) - Fetch memory.keymate.ai URLs
 * [internetsearch](docs/sdks/keymateapi/README.md#internetsearch) - Conduct an internet search
 <!-- End Available Resources and Operations [operations] -->

@@ -433,6 +433,83 @@ class Keymateapi:
 
 
 
+    def ultrafastsearch(self, q: str, percentile: str, numofpages: str) -> operations.UltrafastsearchResponse:
+        r"""This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
+        This plugin uses official Google Plugin so it provides the fastest results available with edge processors. Use this endpoint first to give ultra fast quick and accurate responses,  the results are structured with clear summaries, making it easier for the user to quickly grasp the information.
+        """
+        hook_ctx = HookContext(operation_id='ultrafastsearch', oauth2_scopes=[], security_source=self.sdk_configuration.security)
+        request = operations.UltrafastsearchRequest(
+            q=q,
+            percentile=percentile,
+            numofpages=numofpages,
+        )
+        
+        base_url = utils.template_url(*self.sdk_configuration.get_server_details())
+        
+        url = base_url + '/ultrafastsearch'
+        
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
+        
+        query_params = { **utils.get_query_params(operations.UltrafastsearchRequest, request), **query_params }
+        headers['Accept'] = 'application/json'
+        headers['user-agent'] = self.sdk_configuration.user_agent
+        client = self.sdk_configuration.client
+        
+        try:
+            req = self.sdk_configuration.get_hooks().before_request(
+                hook_ctx, 
+                requests_http.Request('GET', url, params=query_params, headers=headers).prepare(),
+            )
+            http_res = client.send(req)
+        except Exception as e:
+            _, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, None, e)
+            raise e
+
+        if utils.match_status_codes(['400','4XX','5XX'], http_res.status_code):
+            http_res, e = self.sdk_configuration.get_hooks().after_error(hook_ctx, http_res, None)
+            if e:
+                raise e
+        else:
+            result = self.sdk_configuration.get_hooks().after_success(hook_ctx, http_res)
+            if isinstance(result, Exception):
+                raise result
+            http_res = result
+        
+        
+        res = operations.UltrafastsearchResponse(http_meta=components.HTTPMetadata(request=req, response=http_res))
+        
+        if http_res.status_code == 200:
+            if utils.match_content_type(http_res.headers.get('Content-Type'), 'application/json'):                
+                out = utils.unmarshal_json(http_res.text, Optional[operations.UltrafastsearchResponseBody])
+                res.two_hundred_application_json_object = out
+            else:
+                content_type = http_res.headers.get('Content-Type')
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        elif http_res.status_code == 400:
+            if utils.match_content_type(http_res.headers.get('Content-Type'), 'application/json'):                
+                out = utils.unmarshal_json(http_res.text, errors.UltrafastsearchResponseBody)
+                out.http_meta = components.HTTPMetadata(request=req, response=http_res)
+                raise out
+            else:
+                content_type = http_res.headers.get('Content-Type')
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+        elif http_res.status_code >= 400 and http_res.status_code < 500 or http_res.status_code >= 500 and http_res.status_code < 600:
+            raise errors.SDKError('API error occurred', http_res.status_code, http_res.text, http_res)
+        else:
+            if utils.match_content_type(http_res.headers.get('Content-Type'), 'application/json'):                
+                out = utils.unmarshal_json(http_res.text, Optional[operations.UltrafastsearchResponseResponseBody])
+                res.default_application_json_object = out
+            else:
+                content_type = http_res.headers.get('Content-Type')
+                raise errors.SDKError(f'unknown content-type received: {content_type}', http_res.status_code, http_res.text, http_res)
+
+        return res
+
+
+
     def gptsbrowse(self, q: str, percentile: str, numofpages: str, paging: Optional[str] = None) -> operations.GptsbrowseResponse:
         r"""Fetch memory.keymate.ai URLs
         Fetches URLs optimized for https://memory.keymate.ai, requiring bearer token authentication. Reflects user info and provides contextually relevant rules for actions performed.

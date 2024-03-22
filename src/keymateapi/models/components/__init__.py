@@ -6,4 +6,4 @@ from .httpmetadata import *
 from .searchresultitem import *
 from .security import *
 
-__all__ = ["BrowseResultItem","BrowsewithProxyResultItem","FullContent","HTTPMetadata","Results","SearchResultItem","Security"]
+__all__ = ["BrowseResultItem","BrowsewithProxyResultItem","FullContent","HTTPMetadata","SearchResultItem","Security"]

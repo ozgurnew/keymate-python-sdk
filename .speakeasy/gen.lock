@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c7e137ee-5432-4ca7-ac5c-9366d28b54c8
 management:
-  docChecksum: d4b81932af282b99f4c9816380caac72
+  docChecksum: 942ca147b9e0dda2ea0e33059bcff771
   docVersion: 1.0.2
   speakeasyVersion: 1.220.0
   generationVersion: 2.286.7
-  releaseVersion: 0.3.0
-  configChecksum: 6505f98065d607e6ca7d6816c22efa20
+  releaseVersion: 0.3.1
+  configChecksum: 7d401e57ddec83df65364c9162630d74
   repoURL: https://github.com/ozgurnew/keymate-python-sdk.git
   installationURL: https://github.com/ozgurnew/keymate-python-sdk.git
   published: true
@@ -36,6 +36,7 @@ generatedFiles:
   - src/keymateapi/models/operations/browseurl.py
   - src/keymateapi/models/operations/browse.py
   - src/keymateapi/models/operations/search.py
+  - src/keymateapi/models/operations/ultrafastsearch.py
   - src/keymateapi/models/operations/gptsbrowse.py
   - src/keymateapi/models/operations/internetsearch.py
   - src/keymateapi/models/components/httpmetadata.py
@@ -46,6 +47,7 @@ generatedFiles:
   - src/keymateapi/models/errors/browseurl.py
   - src/keymateapi/models/errors/browse.py
   - src/keymateapi/models/errors/search.py
+  - src/keymateapi/models/errors/ultrafastsearch.py
   - src/keymateapi/models/errors/gptsbrowse.py
   - src/keymateapi/models/errors/internetsearch.py
   - src/keymateapi/models/__init__.py
@@ -71,6 +73,11 @@ generatedFiles:
   - docs/models/operations/searchresponseresponsebody.md
   - docs/models/operations/searchresponsebody.md
   - docs/models/operations/searchresponse.md
+  - docs/models/operations/ultrafastsearchrequest.md
+  - docs/models/operations/ultrafastsearchresponseresponsebody.md
+  - docs/models/operations/ultrafastsearchresults.md
+  - docs/models/operations/ultrafastsearchresponsebody.md
+  - docs/models/operations/ultrafastsearchresponse.md
   - docs/models/operations/gptsbrowserequest.md
   - docs/models/operations/gptsbrowseresponseresponsebody.md
   - docs/models/operations/gptsbrowseresponsebody.md
@@ -82,7 +89,6 @@ generatedFiles:
   - docs/models/components/httpmetadata.md
   - docs/models/components/browsewithproxyresultitem.md
   - docs/models/components/browseresultitem.md
-  - docs/models/components/results.md
   - docs/models/components/fullcontent.md
   - docs/models/components/searchresultitem.md
   - docs/models/components/security.md
@@ -91,6 +97,7 @@ generatedFiles:
   - docs/models/errors/browseresponsebody.md
   - docs/models/errors/searchresponseresponsebody.md
   - docs/models/errors/searchresponsebody.md
+  - docs/models/errors/ultrafastsearchresponsebody.md
   - docs/models/errors/gptsbrowseresponseresponsebody.md
   - docs/models/errors/gptsbrowseresponsebody.md
   - docs/models/errors/internetsearchresponseresponsebody.md
