@@ -6,6 +6,7 @@ from .gptsbrowse import *
 from .internetsearch import *
 from .query import *
 from .search import *
+from .ultrafastsearch import *
 from .upsert import *
 
-__all__ = ["BrowseRequest","BrowseResponse","BrowseResponseBody","BrowseResponseResponseBody","BrowseurlRequest","BrowseurlResponse","BrowseurlResponseBody","BrowseurlResponseResponseBody","GptsbrowseRequest","GptsbrowseResponse","GptsbrowseResponseBody","GptsbrowseResponseResponseBody","InternetsearchRequest","InternetsearchResponse","InternetsearchResponseBody","InternetsearchResponseResponseBody","QueryRequest","QueryResponse","QueryResponseBody","Results","SearchRequest","SearchResponse","SearchResponseBody","SearchResponseResponseBody","UpsertRequest","UpsertResponse","UpsertResponseBody"]
+__all__ = ["BrowseRequest","BrowseResponse","BrowseResponseBody","BrowseResponseResponseBody","BrowseurlRequest","BrowseurlResponse","BrowseurlResponseBody","BrowseurlResponseResponseBody","GptsbrowseRequest","GptsbrowseResponse","GptsbrowseResponseBody","GptsbrowseResponseResponseBody","InternetsearchRequest","InternetsearchResponse","InternetsearchResponseBody","InternetsearchResponseResponseBody","QueryRequest","QueryResponse","QueryResponseBody","Results","SearchRequest","SearchResponse","SearchResponseBody","SearchResponseResponseBody","UltrafastsearchRequest","UltrafastsearchResponse","UltrafastsearchResponseBody","UltrafastsearchResponseResponseBody","UltrafastsearchResults","UpsertRequest","UpsertResponse","UpsertResponseBody"]

@@ -12,6 +12,7 @@ Keymate.AI Web Search API: Enhances knowledge grounded responses by fetching URL
 * [browseurl](#browseurl) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
 * [browse](#browse) - Fetch any URLs without proxy it would probably fail on major websites but quicker than browseurl 
 * [search](#search) - Without proxies searches keyword on the internet and fetches urls and optimizes output
+* [ultrafastsearch](#ultrafastsearch) - This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
 * [gptsbrowse](#gptsbrowse) - Fetch memory.keymate.ai URLs
 * [internetsearch](#internetsearch) - Conduct an internet search
 
@@ -221,6 +222,47 @@ if res.two_hundred_application_json_object is not None:
 | errors.SearchResponseBody         | 400                               | application/json                  |
 | errors.SearchResponseResponseBody | 401                               | application/json                  |
 | errors.SDKError                   | 4x-5xx                            | */*                               |
+
+## ultrafastsearch
+
+This plugin uses official Google Plugin so it provides the fastest results available with edge processors. Use this endpoint first to give ultra fast quick and accurate responses,  the results are structured with clear summaries, making it easier for the user to quickly grasp the information.
+
+### Example Usage
+
+```python
+import keymateapi
+
+s = keymateapi.Keymateapi(
+    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
+)
+
+
+res = s.ultrafastsearch(q='https://unfortunate-forearm.info', percentile='<value>', numofpages='<value>')
+
+if res.two_hundred_application_json_object is not None:
+    # handle response
+    pass
+
+```
+
+### Parameters
+
+| Parameter           | Type                | Required            | Description         |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| `q`                 | *str*               | :heavy_check_mark:  | URL of the website. |
+| `percentile`        | *str*               | :heavy_check_mark:  | Set it as '100'     |
+| `numofpages`        | *str*               | :heavy_check_mark:  | Set it as '10'      |
+
+
+### Response
+
+**[operations.UltrafastsearchResponse](../../models/operations/ultrafastsearchresponse.md)**
+### Errors
+
+| Error Object                       | Status Code                        | Content Type                       |
+| ---------------------------------- | ---------------------------------- | ---------------------------------- |
+| errors.UltrafastsearchResponseBody | 400                                | application/json                   |
+| errors.SDKError                    | 4x-5xx                             | */*                                |
 
 ## gptsbrowse
 

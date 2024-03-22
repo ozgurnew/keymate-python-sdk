@@ -6,5 +6,6 @@ from .gptsbrowse import *
 from .internetsearch import *
 from .sdkerror import *
 from .search import *
+from .ultrafastsearch import *
 
-__all__ = ["BrowseResponseBody","BrowseResponseResponseBody","BrowseurlResponseBody","GptsbrowseResponseBody","GptsbrowseResponseResponseBody","InternetsearchResponseBody","InternetsearchResponseResponseBody","SDKError","SearchResponseBody","SearchResponseResponseBody"]
+__all__ = ["BrowseResponseBody","BrowseResponseResponseBody","BrowseurlResponseBody","GptsbrowseResponseBody","GptsbrowseResponseResponseBody","InternetsearchResponseBody","InternetsearchResponseResponseBody","SDKError","SearchResponseBody","SearchResponseResponseBody","UltrafastsearchResponseBody"]
