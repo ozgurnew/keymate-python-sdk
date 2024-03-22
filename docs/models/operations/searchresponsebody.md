@@ -1,4 +1,4 @@
-# GptsbrowseResponseBody
+# SearchResponseBody
 
 Successful operation. Returns fetched results along with applicable rules.
 

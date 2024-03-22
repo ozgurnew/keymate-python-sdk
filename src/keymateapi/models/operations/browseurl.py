@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 import dataclasses
+from ...models.components import browsewithproxyresultitem as components_browsewithproxyresultitem
 from ...models.components import httpmetadata as components_httpmetadata
 from dataclasses_json import Undefined, dataclass_json
 from keymateapi import utils
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 
 @dataclasses.dataclass
@@ -40,7 +41,7 @@ class BrowseurlResponseBody:
     r"""Successful operation"""
     currentkeymateuser: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('currentkeymateuser'), 'exclude': lambda f: f is None }})
     notice_for_human: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noticeForHuman'), 'exclude': lambda f: f is None }})
-    results: Optional[List[Dict[str, Any]]] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('results'), 'exclude': lambda f: f is None }})
+    results: Optional[List[components_browsewithproxyresultitem.BrowsewithProxyResultItem]] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('results'), 'exclude': lambda f: f is None }})
     rules: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('rules'), 'exclude': lambda f: f is None }})
     r"""The rules which recommend gpt to follow."""
     
