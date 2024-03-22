@@ -7,7 +7,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.insertionplan(q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response

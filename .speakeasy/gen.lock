@@ -1,17 +1,18 @@
 lockVersion: 2.0.0
 id: c7e137ee-5432-4ca7-ac5c-9366d28b54c8
 management:
-  docChecksum: 22c458bc83e62d3acaac7a9e8e2cf00f
-  docVersion: 1.0.1
+  docChecksum: d90b333e85510189328dd07c9b433908
+  docVersion: 1.0.2
   speakeasyVersion: 1.220.0
   generationVersion: 2.286.7
-  releaseVersion: 0.1.1
-  configChecksum: 500ce8bf9ff98c855e9db785a6d6c07c
+  releaseVersion: 0.2.0
+  configChecksum: 945a042b3f7cbe629c352ba2b75117b8
   repoURL: https://github.com/ozgurnew/keymate-python-sdk.git
   installationURL: https://github.com/ozgurnew/keymate-python-sdk.git
   published: true
 features:
   python:
+    constsAndDefaults: 0.1.3
     core: 4.5.1
     flattening: 2.81.1
     globalSecurity: 2.83.5
@@ -29,151 +30,53 @@ generatedFiles:
   - src/keymateapi/utils/utils.py
   - src/keymateapi/models/errors/sdkerror.py
   - tests/helpers.py
-  - src/keymateapi/models/operations/insertionplan.py
+  - src/keymateapi/models/operations/upsert.py
+  - src/keymateapi/models/operations/query.py
+  - src/keymateapi/models/operations/browseurl.py
+  - src/keymateapi/models/operations/browse.py
   - src/keymateapi/models/operations/gptsbrowse.py
   - src/keymateapi/models/operations/internetsearch.py
-  - src/keymateapi/models/operations/browseurl.py
-  - src/keymateapi/models/operations/metadatakb.py
-  - src/keymateapi/models/operations/listpdfs.py
-  - src/keymateapi/models/operations/ultrafastsearch.py
-  - src/keymateapi/models/operations/upsert.py
-  - src/keymateapi/models/operations/insert.py
-  - src/keymateapi/models/operations/savetopkb.py
-  - src/keymateapi/models/operations/upsertjson.py
-  - src/keymateapi/models/operations/ulpdfload.py
-  - src/keymateapi/models/operations/list.py
-  - src/keymateapi/models/operations/help.py
-  - src/keymateapi/models/operations/query.py
-  - src/keymateapi/models/operations/pkb.py
-  - src/keymateapi/models/operations/pdfsearch.py
-  - src/keymateapi/models/operations/upserttousersknowledgebase.py
-  - src/keymateapi/models/operations/queryusersknowledgebase.py
-  - src/keymateapi/models/operations/academicsearchdoi.py
-  - src/keymateapi/models/operations/hybrid.py
-  - src/keymateapi/models/operations/academicsearchquery.py
   - src/keymateapi/models/components/httpmetadata.py
   - src/keymateapi/models/components/security.py
+  - src/keymateapi/models/errors/browseurl.py
+  - src/keymateapi/models/errors/browse.py
   - src/keymateapi/models/errors/gptsbrowse.py
   - src/keymateapi/models/errors/internetsearch.py
-  - src/keymateapi/models/errors/browseurl.py
-  - src/keymateapi/models/errors/ultrafastsearch.py
-  - src/keymateapi/models/errors/hybrid.py
   - src/keymateapi/models/__init__.py
   - src/keymateapi/models/errors/__init__.py
   - src/keymateapi/models/operations/__init__.py
   - src/keymateapi/models/components/__init__.py
-  - docs/models/operations/insertionplanrequest.md
-  - docs/models/operations/status.md
-  - docs/models/operations/insertionplanresponsebody.md
-  - docs/models/operations/insertionplanresponse.md
+  - docs/models/operations/upsertrequest.md
+  - docs/models/operations/upsertresponsebody.md
+  - docs/models/operations/upsertresponse.md
+  - docs/models/operations/queryrequest.md
+  - docs/models/operations/queryresponsebody.md
+  - docs/models/operations/queryresponse.md
+  - docs/models/operations/browseurlrequest.md
+  - docs/models/operations/browseurlresponseresponsebody.md
+  - docs/models/operations/browseurlresponsebody.md
+  - docs/models/operations/browseurlresponse.md
+  - docs/models/operations/browserequest.md
+  - docs/models/operations/browseresponseresponsebody.md
+  - docs/models/operations/browseresponsebody.md
+  - docs/models/operations/browseresponse.md
   - docs/models/operations/gptsbrowserequest.md
   - docs/models/operations/gptsbrowseresponseresponsebody.md
-  - docs/models/operations/results.md
   - docs/models/operations/gptsbrowseresponsebody.md
   - docs/models/operations/gptsbrowseresponse.md
   - docs/models/operations/internetsearchrequest.md
   - docs/models/operations/internetsearchresponseresponsebody.md
-  - docs/models/operations/internetsearchresults.md
   - docs/models/operations/internetsearchresponsebody.md
   - docs/models/operations/internetsearchresponse.md
-  - docs/models/operations/browseurlrequest.md
-  - docs/models/operations/browseurlresponseresponsebody.md
-  - docs/models/operations/browseurlresults.md
-  - docs/models/operations/browseurlresponsebody.md
-  - docs/models/operations/browseurlresponse.md
-  - docs/models/operations/metadatakbrequest.md
-  - docs/models/operations/metadata.md
-  - docs/models/operations/sparsevalues.md
-  - docs/models/operations/matches.md
-  - docs/models/operations/metadatakbresponsebody.md
-  - docs/models/operations/metadatakbresponse.md
-  - docs/models/operations/listpdfsmetadata.md
-  - docs/models/operations/listpdfssparsevalues.md
-  - docs/models/operations/listpdfsmatches.md
-  - docs/models/operations/listpdfsresponsebody.md
-  - docs/models/operations/listpdfsresponse.md
-  - docs/models/operations/ultrafastsearchrequest.md
-  - docs/models/operations/ultrafastsearchresponseresponsebody.md
-  - docs/models/operations/ultrafastsearchresults.md
-  - docs/models/operations/ultrafastsearchresponsebody.md
-  - docs/models/operations/ultrafastsearchresponse.md
-  - docs/models/operations/upsertrequest.md
-  - docs/models/operations/upsertstatus.md
-  - docs/models/operations/upsertresponsebody.md
-  - docs/models/operations/upsertresponse.md
-  - docs/models/operations/insertrequest.md
-  - docs/models/operations/insertstatus.md
-  - docs/models/operations/insertresponsebody.md
-  - docs/models/operations/insertresponse.md
-  - docs/models/operations/savetopkbrequest.md
-  - docs/models/operations/savetopkbstatus.md
-  - docs/models/operations/savetopkbresponsebody.md
-  - docs/models/operations/savetopkbresponse.md
-  - docs/models/operations/upsertjsonrequestbody.md
-  - docs/models/operations/upsertjsonstatus.md
-  - docs/models/operations/upsertjsonresponsebody.md
-  - docs/models/operations/upsertjsonresponse.md
-  - docs/models/operations/ulpdfloadstatus.md
-  - docs/models/operations/ulpdfloadresponsebody.md
-  - docs/models/operations/ulpdfloadresponse.md
-  - docs/models/operations/liststatus.md
-  - docs/models/operations/listresponsebody.md
-  - docs/models/operations/listresponse.md
-  - docs/models/operations/helpstatus.md
-  - docs/models/operations/helpresponsebody.md
-  - docs/models/operations/helpresponse.md
-  - docs/models/operations/queryrequest.md
-  - docs/models/operations/querymetadata.md
-  - docs/models/operations/querysparsevalues.md
-  - docs/models/operations/querymatches.md
-  - docs/models/operations/queryresponsebody.md
-  - docs/models/operations/queryresponse.md
-  - docs/models/operations/pkbrequest.md
-  - docs/models/operations/pkbmetadata.md
-  - docs/models/operations/pkbsparsevalues.md
-  - docs/models/operations/pkbmatches.md
-  - docs/models/operations/pkbresponsebody.md
-  - docs/models/operations/pkbresponse.md
-  - docs/models/operations/pdfsearchrequest.md
-  - docs/models/operations/pdfsearchmetadata.md
-  - docs/models/operations/pdfsearchsparsevalues.md
-  - docs/models/operations/pdfsearchmatches.md
-  - docs/models/operations/pdfsearchresponsebody.md
-  - docs/models/operations/pdfsearchresponse.md
-  - docs/models/operations/upserttousersknowledgebaserequest.md
-  - docs/models/operations/upserttousersknowledgebasestatus.md
-  - docs/models/operations/upserttousersknowledgebaseresponsebody.md
-  - docs/models/operations/upserttousersknowledgebaseresponse.md
-  - docs/models/operations/queryusersknowledgebaserequest.md
-  - docs/models/operations/queryusersknowledgebasemetadata.md
-  - docs/models/operations/queryusersknowledgebasesparsevalues.md
-  - docs/models/operations/queryusersknowledgebasematches.md
-  - docs/models/operations/queryusersknowledgebaseresponsebody.md
-  - docs/models/operations/queryusersknowledgebaseresponse.md
-  - docs/models/operations/academicsearchdoirequest.md
-  - docs/models/operations/academicsearchdoimetadata.md
-  - docs/models/operations/academicsearchdoisparsevalues.md
-  - docs/models/operations/academicsearchdoimatches.md
-  - docs/models/operations/academicsearchdoiresponsebody.md
-  - docs/models/operations/academicsearchdoiresponse.md
-  - docs/models/operations/hybridrequest.md
-  - docs/models/operations/hybridresponseresponsebody.md
-  - docs/models/operations/hybridresults.md
-  - docs/models/operations/hybridresponsebody.md
-  - docs/models/operations/hybridresponse.md
-  - docs/models/operations/academicsearchqueryrequest.md
-  - docs/models/operations/academicsearchquerymetadata.md
-  - docs/models/operations/academicsearchquerysparsevalues.md
-  - docs/models/operations/academicsearchquerymatches.md
-  - docs/models/operations/academicsearchqueryresponsebody.md
-  - docs/models/operations/academicsearchqueryresponse.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/security.md
-  - docs/models/errors/gptsbrowseresponsebody.md
-  - docs/models/errors/internetsearchresponsebody.md
   - docs/models/errors/browseurlresponsebody.md
-  - docs/models/errors/ultrafastsearchresponsebody.md
-  - docs/models/errors/hybridresponsebody.md
+  - docs/models/errors/browseresponseresponsebody.md
+  - docs/models/errors/browseresponsebody.md
+  - docs/models/errors/gptsbrowseresponseresponsebody.md
+  - docs/models/errors/gptsbrowseresponsebody.md
+  - docs/models/errors/internetsearchresponseresponsebody.md
+  - docs/models/errors/internetsearchresponsebody.md
   - docs/sdks/keymateapi/README.md
   - USAGE.md
   - .gitattributes
