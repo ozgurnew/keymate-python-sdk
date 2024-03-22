@@ -112,7 +112,7 @@ You can override the default server globally by passing a server index to the `s
 
 | # | Server | Variables |
 | - | ------ | --------- |
-| 0 | `https://searchweb.keymate.ai` | None |
+| 0 | `https://server.searchweb.keymate.ai` | None |
 
 #### Example
 
@@ -141,7 +141,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import keymateapi
 
 s = keymateapi.Keymateapi(
-    server_url="https://searchweb.keymate.ai",
+    server_url="https://server.searchweb.keymate.ai",
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
