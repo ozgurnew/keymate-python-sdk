@@ -1,17 +1,18 @@
 lockVersion: 2.0.0
 id: c7e137ee-5432-4ca7-ac5c-9366d28b54c8
 management:
-  docChecksum: 0b60ed9fd6343b7e6cae28a839c9462b
+  docChecksum: d4b81932af282b99f4c9816380caac72
   docVersion: 1.0.2
   speakeasyVersion: 1.220.0
   generationVersion: 2.286.7
-  releaseVersion: 0.2.1
-  configChecksum: 5c30c3581640f16687b126d448c0e5d8
+  releaseVersion: 0.3.0
+  configChecksum: 6505f98065d607e6ca7d6816c22efa20
   repoURL: https://github.com/ozgurnew/keymate-python-sdk.git
   installationURL: https://github.com/ozgurnew/keymate-python-sdk.git
   published: true
 features:
   python:
+    additionalProperties: 0.1.0
     constsAndDefaults: 0.1.3
     core: 4.5.1
     flattening: 2.81.1
@@ -34,12 +35,17 @@ generatedFiles:
   - src/keymateapi/models/operations/query.py
   - src/keymateapi/models/operations/browseurl.py
   - src/keymateapi/models/operations/browse.py
+  - src/keymateapi/models/operations/search.py
   - src/keymateapi/models/operations/gptsbrowse.py
   - src/keymateapi/models/operations/internetsearch.py
   - src/keymateapi/models/components/httpmetadata.py
+  - src/keymateapi/models/components/browsewithproxyresultitem.py
+  - src/keymateapi/models/components/browseresultitem.py
+  - src/keymateapi/models/components/searchresultitem.py
   - src/keymateapi/models/components/security.py
   - src/keymateapi/models/errors/browseurl.py
   - src/keymateapi/models/errors/browse.py
+  - src/keymateapi/models/errors/search.py
   - src/keymateapi/models/errors/gptsbrowse.py
   - src/keymateapi/models/errors/internetsearch.py
   - src/keymateapi/models/__init__.py
@@ -58,8 +64,13 @@ generatedFiles:
   - docs/models/operations/browseurlresponse.md
   - docs/models/operations/browserequest.md
   - docs/models/operations/browseresponseresponsebody.md
+  - docs/models/operations/results.md
   - docs/models/operations/browseresponsebody.md
   - docs/models/operations/browseresponse.md
+  - docs/models/operations/searchrequest.md
+  - docs/models/operations/searchresponseresponsebody.md
+  - docs/models/operations/searchresponsebody.md
+  - docs/models/operations/searchresponse.md
   - docs/models/operations/gptsbrowserequest.md
   - docs/models/operations/gptsbrowseresponseresponsebody.md
   - docs/models/operations/gptsbrowseresponsebody.md
@@ -69,10 +80,17 @@ generatedFiles:
   - docs/models/operations/internetsearchresponsebody.md
   - docs/models/operations/internetsearchresponse.md
   - docs/models/components/httpmetadata.md
+  - docs/models/components/browsewithproxyresultitem.md
+  - docs/models/components/browseresultitem.md
+  - docs/models/components/results.md
+  - docs/models/components/fullcontent.md
+  - docs/models/components/searchresultitem.md
   - docs/models/components/security.md
   - docs/models/errors/browseurlresponsebody.md
   - docs/models/errors/browseresponseresponsebody.md
   - docs/models/errors/browseresponsebody.md
+  - docs/models/errors/searchresponseresponsebody.md
+  - docs/models/errors/searchresponsebody.md
   - docs/models/errors/gptsbrowseresponseresponsebody.md
   - docs/models/errors/gptsbrowseresponsebody.md
   - docs/models/errors/internetsearchresponseresponsebody.md
