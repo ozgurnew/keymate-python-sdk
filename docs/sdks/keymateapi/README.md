@@ -195,7 +195,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.search(q='http://fake-flume.name', percentile='1', numofpages='1')
+res = s.search(q='bitcoin', percentile='1', numofpages='1')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -278,7 +278,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='1', numofpages='1', paging='1')
+res = s.gptsbrowse(q='https://memory.keymate.ai/file/ba946eda-c5ce-4234-82d2-1cec68b78a44.pdf', percentile='1', numofpages='1', paging='1')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
