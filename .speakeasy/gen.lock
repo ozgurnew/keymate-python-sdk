@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: c7e137ee-5432-4ca7-ac5c-9366d28b54c8
 management:
-  docChecksum: d90b333e85510189328dd07c9b433908
+  docChecksum: 0b60ed9fd6343b7e6cae28a839c9462b
   docVersion: 1.0.2
   speakeasyVersion: 1.220.0
   generationVersion: 2.286.7
-  releaseVersion: 0.2.0
-  configChecksum: 945a042b3f7cbe629c352ba2b75117b8
+  releaseVersion: 0.2.1
+  configChecksum: 5c30c3581640f16687b126d448c0e5d8
   repoURL: https://github.com/ozgurnew/keymate-python-sdk.git
   installationURL: https://github.com/ozgurnew/keymate-python-sdk.git
   published: true
