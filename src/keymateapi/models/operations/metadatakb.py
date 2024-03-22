@@ -9,13 +9,6 @@ from typing import Any, List, Optional
 
 
 @dataclasses.dataclass
-class MetadatakbSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class MetadatakbRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""Set this as '' because it only gives metadata"""

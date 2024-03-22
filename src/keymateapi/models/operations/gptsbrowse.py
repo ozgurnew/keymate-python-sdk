@@ -9,13 +9,6 @@ from typing import List, Optional
 
 
 @dataclasses.dataclass
-class GptsbrowseSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class GptsbrowseRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""URL of the website. Url should be starting with https://memory.keymate.ai"""
