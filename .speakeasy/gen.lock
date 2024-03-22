@@ -3,10 +3,10 @@ id: c7e137ee-5432-4ca7-ac5c-9366d28b54c8
 management:
   docChecksum: 22c458bc83e62d3acaac7a9e8e2cf00f
   docVersion: 1.0.1
-  speakeasyVersion: 1.213.0
-  generationVersion: 2.283.1
-  releaseVersion: 0.1.0
-  configChecksum: 77db076d2e46039b9829d59ad9056779
+  speakeasyVersion: 1.220.0
+  generationVersion: 2.286.7
+  releaseVersion: 0.1.1
+  configChecksum: 500ce8bf9ff98c855e9db785a6d6c07c
   repoURL: https://github.com/ozgurnew/keymate-python-sdk.git
   installationURL: https://github.com/ozgurnew/keymate-python-sdk.git
   published: true
