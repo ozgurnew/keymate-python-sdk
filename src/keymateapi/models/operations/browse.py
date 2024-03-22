@@ -9,7 +9,7 @@ from typing import Any, Dict, List, Optional
 
 
 @dataclasses.dataclass
-class GptsbrowseRequest:
+class BrowseRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""URL starting with https://memory.keymate.ai. Must be a valid URL."""
     percentile: str = dataclasses.field(default='1', metadata={'query_param': { 'field_name': 'percentile', 'style': 'form', 'explode': True }})
@@ -24,7 +24,7 @@ class GptsbrowseRequest:
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
-class GptsbrowseResponseResponseBody:
+class BrowseResponseResponseBody:
     r"""Generic or unexpected error."""
     error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
     
@@ -33,7 +33,7 @@ class GptsbrowseResponseResponseBody:
 
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
-class GptsbrowseResponseBody:
+class BrowseResponseBody:
     r"""Successful operation. Returns fetched results along with applicable rules."""
     currentkeymateuser: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('currentkeymateuser'), 'exclude': lambda f: f is None }})
     notice_for_human: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noticeForHuman'), 'exclude': lambda f: f is None }})
@@ -44,11 +44,11 @@ class GptsbrowseResponseBody:
 
 
 @dataclasses.dataclass
-class GptsbrowseResponse:
+class BrowseResponse:
     http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
-    two_hundred_application_json_object: Optional[GptsbrowseResponseBody] = dataclasses.field(default=None)
+    two_hundred_application_json_object: Optional[BrowseResponseBody] = dataclasses.field(default=None)
     r"""Successful operation. Returns fetched results along with applicable rules."""
-    default_application_json_object: Optional[GptsbrowseResponseResponseBody] = dataclasses.field(default=None)
+    default_application_json_object: Optional[BrowseResponseResponseBody] = dataclasses.field(default=None)
     r"""Generic or unexpected error."""
     
 

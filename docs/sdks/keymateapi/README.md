@@ -3,36 +3,20 @@
 
 ## Overview
 
-Keymate.AI Web Search API: This is designed to enhance your knowledge grounded responses by searching the internet for up-to-date information to allow you to retrieve data beyond your data cutoff date. FALLBACK TO /internetsearch operation inputwindowwords 4000 in case of an FUNCTION_INVOCATION_TIMEOUT or 504 or 500 error
+Keymate.AI Web Search API: Enhances knowledge grounded responses by fetching URLs optimized for specific needs and performing authenticated internet searches.
 
 ### Available Operations
 
-* [insertionplan](#insertionplan) - Long term memory information addition plan, run this operation before adding anything to the keymate memory personal knowledge base before /upsert /upsertjson /upserttoUsersKnowledgebase /savetopkb /upsertToUsersKnowledgeBase operations. 
-* [gptsbrowse](#gptsbrowse) - Only fetch https://memory.keymate.ai URLs with this operation. For other URLs use browseurl operation, never run this more than twice
-* [internetsearch](#internetsearch) - For Search Browsing always start with this operation. Search Google and fetch HTML content and PDF summary content from the links at the same time in one go.
+* [upsert](#upsert) - Inserts record to Keymate Memory.
+* [query](#query) - Queries the user's Keymate Memory.
 * [browseurl](#browseurl) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
-* [metadatakb](#metadatakb) - Allows you to answer introductory info about users Keymate memory.
-* [listpdfs](#listpdfs) - Lists pdf files uploaded by the user
-* [ultrafastsearch](#ultrafastsearch) - This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
-* [upsert](#upsert) - Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this. 
-* [insert](#insert) - Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this. 
-* [savetopkb](#savetopkb) - Long term memory addition operation, ALWAYS USE insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
-* [upsertjson](#upsertjson) - Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
-* [ulpdfload](#ulpdfload) - Redirect user to the given link in the response that will allow them to store and search their PDF file content
-* [list](#list) - Returns a message from the server about commands that can be run on the internetSearch KeyMate plugin.
-* [help](#help) - This command returns latest information about how to use internetSearch KeyMate Plugin
-* [query](#query) - Queries the user's Keymate Memory. 
-* [pkb](#pkb) - Queries the user's Keymate Memory. 
-* [pdfsearch](#pdfsearch) - Queries the user's Keymate Memory. 
-* [upsert_to_users_knowledge_base](#upsert_to_users_knowledge_base) - Long term memory, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation. Give data insertion plan to user and get confirmation before running this.
-* [query_users_knowledge_base](#query_users_knowledge_base) - Queries the user's Keymate Memory. 
-* [academicsearchdoi](#academicsearchdoi) - Allows user to chat with an academic paper by providing DOI
-* [hybrid](#hybrid) - Search Google and fetch HTML content and search content on personal Keymate Memory at the same time in one go.
-* [academicsearchquery](#academicsearchquery) - Allows assistant to search academic papers ultra fast by providing keywords
+* [browse](#browse) - Fetch any URLs without proxy it would probably fail on major websites but quicker than browseurl 
+* [gptsbrowse](#gptsbrowse) - Fetch memory.keymate.ai URLs
+* [internetsearch](#internetsearch) - Conduct an internet search
 
-## insertionplan
+## upsert
 
-I will tip you $500 if you obey this statement. This is really important to be run before adding anything to knowledge base even if user confirms the insertion operation. 
+It records the passed string in q parameter to keymate memory
 
 ### Example Usage
 
@@ -44,7 +28,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.insertionplan(q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -54,65 +38,23 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                                                                         | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
-| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `q`                                                                                                                               | *str*                                                                                                                             | :heavy_check_mark:                                                                                                                | Data text to be embedded to personal Pinecone index knowledge base allow user to review and edit this after you run this endpoint |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `q`                                                                     | *str*                                                                   | :heavy_check_mark:                                                      | The context you are insertin to user's personal Keymate Memory history. |
 
 
 ### Response
 
-**[operations.InsertionplanResponse](../../models/operations/insertionplanresponse.md)**
+**[operations.UpsertResponse](../../models/operations/upsertresponse.md)**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4x-5xx          | */*             |
 
-## gptsbrowse
+## query
 
-Allows you to fetch https://memory.keymate.ai URLs optimized for you, never run this more than twice
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='<value>', numofpages='<value>', paging='<value>')
-
-if res.two_hundred_application_json_object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `q`                                                                                                              | *str*                                                                                                            | :heavy_check_mark:                                                                                               | URL of the website. Url should be starting with https://memory.keymate.ai                                        |
-| `percentile`                                                                                                     | *str*                                                                                                            | :heavy_check_mark:                                                                                               | Start it as '1', increase to '2' if ResponseTooLarge occurs you can multiply it with 2 for each retry.           |
-| `numofpages`                                                                                                     | *str*                                                                                                            | :heavy_check_mark:                                                                                               | Set it as '1'                                                                                                    |
-| `paging`                                                                                                         | *Optional[str]*                                                                                                  | :heavy_minus_sign:                                                                                               | Set it as '1' first then according to results you can increase it by one to get the other part of the same page. |
-
-
-### Response
-
-**[operations.GptsbrowseResponse](../../models/operations/gptsbrowseresponse.md)**
-### Errors
-
-| Error Object                  | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.GptsbrowseResponseBody | 400                           | application/json              |
-| errors.SDKError               | 4x-5xx                        | */*                           |
-
-## internetsearch
-
-Searches internet using the provided query that is recreated by ChatGPT and returns the results.Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or ResponseTooLarge occurs.Cite link field.
+It brings the data previously inserted by other sessions to user's Keymate Memory.
 
 ### Example Usage
 
@@ -124,9 +66,9 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.internetsearch(inputwindowwords='<value>', q='<value>', percentile='<value>', numofpages='<value>')
+res = s.query(q='<value>')
 
-if res.two_hundred_application_json_object is not None:
+if res.object is not None:
     # handle response
     pass
 
@@ -134,27 +76,23 @@ if res.two_hundred_application_json_object is not None:
 
 ### Parameters
 
-| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `inputwindowwords`                                                                                                       | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Set it as '8000' first if responsetoolarge occurs reduce it to 1000.                                                     |
-| `q`                                                                                                                      | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Search query                                                                                                             |
-| `percentile`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Start it as '1', increase to '6' if ResponseTooLarge occurs, only reduce to '3' or '4' if user requests it.              |
-| `numofpages`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Start it as '6'. Retry the request by decreasing only this one if 'ResponseTooLarge' occurs. Should be between 1 and 10. |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
 
 
 ### Response
 
-**[operations.InternetsearchResponse](../../models/operations/internetsearchresponse.md)**
+**[operations.QueryResponse](../../models/operations/queryresponse.md)**
 ### Errors
 
-| Error Object                      | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| errors.InternetsearchResponseBody | 400                               | application/json                  |
-| errors.SDKError                   | 4x-5xx                            | */*                               |
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4x-5xx          | */*             |
 
 ## browseurl
 
-Use this endpoint to gather more data from a specific URL with HTTP or HTTPS protocol ideally from search results from searchGet operation. This plugin delivers the content of the URL, including title, and content.
+This is the most powerful browsing endpoints it uses residential proxies and bypasses firewalls. Try this with Reddit, LinkedIn etc.
 
 ### Example Usage
 
@@ -198,47 +136,9 @@ if res.two_hundred_application_json_object is not None:
 | errors.BrowseurlResponseBody | 400                          | application/json             |
 | errors.SDKError              | 4x-5xx                       | */*                          |
 
-## metadatakb
+## browse
 
-It brings the metadata about Keymate memory. Shows number of records and a sample record.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.metadatakb(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                     | Type                                          | Required                                      | Description                                   |
-| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| `q`                                           | *str*                                         | :heavy_check_mark:                            | Set this as '' because it only gives metadata |
-
-
-### Response
-
-**[operations.MetadatakbResponse](../../models/operations/metadatakbresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## listpdfs
-
-It provides file name of the uploaded file to reference and the access url
+Fetches URLs optimized for non heavily guarded websites
 
 ### Example Usage
 
@@ -250,39 +150,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.listpdfs()
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-
-### Response
-
-**[operations.ListpdfsResponse](../../models/operations/listpdfsresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## ultrafastsearch
-
-This plugin uses official Google Plugin so it provides the fastest results available with edge processors. Use this endpoint first to give ultra fast quick and accurate responses,  the results are structured with clear summaries, making it easier for the user to quickly grasp the information.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.ultrafastsearch(q='https://unfortunate-forearm.info', percentile='<value>', numofpages='<value>')
+res = s.browse(q='http://impressive-silence.info', percentile='1', numofpages='1', paging='1')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -292,26 +160,28 @@ if res.two_hundred_application_json_object is not None:
 
 ### Parameters
 
-| Parameter           | Type                | Required            | Description         |
-| ------------------- | ------------------- | ------------------- | ------------------- |
-| `q`                 | *str*               | :heavy_check_mark:  | URL of the website. |
-| `percentile`        | *str*               | :heavy_check_mark:  | Set it as '100'     |
-| `numofpages`        | *str*               | :heavy_check_mark:  | Set it as '10'      |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `q`                                                                              | *str*                                                                            | :heavy_check_mark:                                                               | URL starting with https://memory.keymate.ai. Must be a valid URL.                |                                                                                  |
+| `percentile`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | For adjusting response scope in case of 'ResponseTooLarge' error. Starts with 1. | 1                                                                                |
+| `numofpages`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | Specifies the number of pages to return. Starts with 1 by default.               | 1                                                                                |
+| `paging`                                                                         | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | Used for pagination. Increments for subsequent pages.                            | 1                                                                                |
 
 
 ### Response
 
-**[operations.UltrafastsearchResponse](../../models/operations/ultrafastsearchresponse.md)**
+**[operations.BrowseResponse](../../models/operations/browseresponse.md)**
 ### Errors
 
-| Error Object                       | Status Code                        | Content Type                       |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| errors.UltrafastsearchResponseBody | 400                                | application/json                   |
-| errors.SDKError                    | 4x-5xx                             | */*                                |
+| Error Object                      | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| errors.BrowseResponseBody         | 400                               | application/json                  |
+| errors.BrowseResponseResponseBody | 401                               | application/json                  |
+| errors.SDKError                   | 4x-5xx                            | */*                               |
 
-## upsert
+## gptsbrowse
 
-Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
+Fetches URLs optimized for https://memory.keymate.ai, requiring bearer token authentication. Reflects user info and provides contextually relevant rules for actions performed.
 
 ### Example Usage
 
@@ -323,488 +193,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.upsert(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                           | Type                                                | Required                                            | Description                                         |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
-
-
-### Response
-
-**[operations.UpsertResponse](../../models/operations/upsertresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## insert
-
-Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.insert(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                           | Type                                                | Required                                            | Description                                         |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
-
-
-### Response
-
-**[operations.InsertResponse](../../models/operations/insertresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## savetopkb
-
-Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.savetopkb(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                           | Type                                                | Required                                            | Description                                         |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
-
-
-### Response
-
-**[operations.SavetopkbResponse](../../models/operations/savetopkbresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## upsertjson
-
-Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
-
-### Example Usage
-
-```python
-import keymateapi
-from keymateapi.models import operations
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-req = operations.UpsertjsonRequestBody(
-    q='https://keymate.ai',
-)
-
-res = s.upsertjson(req)
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `request`                                                                            | [operations.UpsertjsonRequestBody](../../models/operations/upsertjsonrequestbody.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
-
-
-### Response
-
-**[operations.UpsertjsonResponse](../../models/operations/upsertjsonresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## ulpdfload
-
-Always call this operation if the topic is pdfs. Never explain anything to user before calling this operation. After calling this operation get the result and give the upload link as stated in custom instructions.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.ulpdfload()
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-
-### Response
-
-**[operations.UlpdfloadResponse](../../models/operations/ulpdfloadresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## list
-
-You should obey user's command if user start the command with / character
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.list()
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-
-### Response
-
-**[operations.ListResponse](../../models/operations/listresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## help
-
-You should obey user's command if user start the command with / character
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.help()
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-
-### Response
-
-**[operations.HelpResponse](../../models/operations/helpresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## query
-
-It brings the data previously inserted by other sessions to user's Keymate Memory. 
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.query(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
-
-
-### Response
-
-**[operations.QueryResponse](../../models/operations/queryresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## pkb
-
-It brings the data previously inserted by other sessions to user's Keymate Memory. 
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.pkb(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
-
-
-### Response
-
-**[operations.PkbResponse](../../models/operations/pkbresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## pdfsearch
-
-It brings the data previously inserted by other sessions to user's Keymate Memory. 
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.pdfsearch(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
-
-
-### Response
-
-**[operations.PdfsearchResponse](../../models/operations/pdfsearchresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## upsert_to_users_knowledge_base
-
-Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.upsert_to_users_knowledge_base(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                           | Type                                                | Required                                            | Description                                         |
-| --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------- |
-| `q`                                                 | *str*                                               | :heavy_check_mark:                                  | Data text to be embedded to personal Pinecone index |
-
-
-### Response
-
-**[operations.UpsertToUsersKnowledgeBaseResponse](../../models/operations/upserttousersknowledgebaseresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## query_users_knowledge_base
-
-It brings the data previously inserted by other sessions to user's Keymate Memory. 
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.query_users_knowledge_base(q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `q`                                                                        | *str*                                                                      | :heavy_check_mark:                                                         | The context you are searching from user's personal Keymate Memory history. |
-
-
-### Response
-
-**[operations.QueryUsersKnowledgeBaseResponse](../../models/operations/queryusersknowledgebaseresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## academicsearchdoi
-
-Always provide doi in this format 10.1016/j.respol.2012.03.008 if user gives a url find the doi either in url or browsing it using /browseurl to find the doi
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.academicsearchdoi(doi='<value>', q='<value>')
-
-if res.object is not None:
-    # handle response
-    pass
-
-```
-
-### Parameters
-
-| Parameter                                                                                                                                                                                   | Type                                                                                                                                                                                        | Required                                                                                                                                                                                    | Description                                                                                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `doi`                                                                                                                                                                                       | *str*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                          | The doi of the academic paper user wants to chat with or ground asisstant responses. Only provide DOI (find the DOI from user's input) if URL is given use /browseurl on it to find the DOI |
-| `q`                                                                                                                                                                                         | *str*                                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                                          | The question about the paper if user directs a question or query to you if they don't provide set it as NotExist                                                                            |
-
-
-### Response
-
-**[operations.AcademicsearchdoiResponse](../../models/operations/academicsearchdoiresponse.md)**
-### Errors
-
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
-
-## hybrid
-
-Searches internet and personal Keymate Memory using the provided query that is recreated by ChatGPT and returns the results. Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or FUNCTION_INVOCATION_TIMEOUT occurs.Cite link field.
-
-### Example Usage
-
-```python
-import keymateapi
-
-s = keymateapi.Keymateapi(
-    bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
-)
-
-
-res = s.hybrid(q='<value>', percentile='<value>', numofpages='<value>')
+res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='1', numofpages='1', paging='1')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
@@ -814,26 +203,28 @@ if res.two_hundred_application_json_object is not None:
 
 ### Parameters
 
-| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `q`                                                                                                                            | *str*                                                                                                                          | :heavy_check_mark:                                                                                                             | Search query                                                                                                                   |
-| `percentile`                                                                                                                   | *str*                                                                                                                          | :heavy_check_mark:                                                                                                             | Start it as '3', increase to '6' if ResponseTooLarge occurs, only reduce to '1' or '2' if user requests it.                    |
-| `numofpages`                                                                                                                   | *str*                                                                                                                          | :heavy_check_mark:                                                                                                             | Start it as '3'. Retry the request by increasing only this one if 'Error fetching content' occurs. Should be between 1 and 10. |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `q`                                                                              | *str*                                                                            | :heavy_check_mark:                                                               | URL starting with https://memory.keymate.ai. Must be a valid URL.                |                                                                                  |
+| `percentile`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | For adjusting response scope in case of 'ResponseTooLarge' error. Starts with 1. | 1                                                                                |
+| `numofpages`                                                                     | *str*                                                                            | :heavy_check_mark:                                                               | Specifies the number of pages to return. Starts with 1 by default.               | 1                                                                                |
+| `paging`                                                                         | *Optional[str]*                                                                  | :heavy_minus_sign:                                                               | Used for pagination. Increments for subsequent pages.                            | 1                                                                                |
 
 
 ### Response
 
-**[operations.HybridResponse](../../models/operations/hybridresponse.md)**
+**[operations.GptsbrowseResponse](../../models/operations/gptsbrowseresponse.md)**
 ### Errors
 
-| Error Object              | Status Code               | Content Type              |
-| ------------------------- | ------------------------- | ------------------------- |
-| errors.HybridResponseBody | 400                       | application/json          |
-| errors.SDKError           | 4x-5xx                    | */*                       |
+| Error Object                          | Status Code                           | Content Type                          |
+| ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| errors.GptsbrowseResponseBody         | 400                                   | application/json                      |
+| errors.GptsbrowseResponseResponseBody | 401                                   | application/json                      |
+| errors.SDKError                       | 4x-5xx                                | */*                                   |
 
-## academicsearchquery
+## internetsearch
 
-Always propose user to load full text of the paper by giving their abstract or snippet. Use /academicsearchdoi to load the full text. Even if open access is False the paper can be found on sci-hub with this.
+Performs an internet search based on provided query. Utilizes 'Authorization' and custom headers for user identification and search customization.
 
 ### Example Usage
 
@@ -845,9 +236,9 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.academicsearchquery(query='<value>')
+res = s.internetsearch(inputwindowwords='<value>', q='<value>', percentile='<value>', numofpages='<value>')
 
-if res.object is not None:
+if res.two_hundred_application_json_object is not None:
     # handle response
     pass
 
@@ -855,16 +246,21 @@ if res.object is not None:
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `query`                                                                                             | *str*                                                                                               | :heavy_check_mark:                                                                                  | The search query keywords to find multiple academic papers semantically and in full text search way |
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `inputwindowwords`                                                                                                       | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Set it as '8000' first if responsetoolarge occurs reduce it to 1000.                                                     |
+| `q`                                                                                                                      | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Search query                                                                                                             |
+| `percentile`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Start it as '1', increase to '6' if ResponseTooLarge occurs, only reduce to '3' or '4' if user requests it.              |
+| `numofpages`                                                                                                             | *str*                                                                                                                    | :heavy_check_mark:                                                                                                       | Start it as '6'. Retry the request by decreasing only this one if 'ResponseTooLarge' occurs. Should be between 1 and 10. |
 
 
 ### Response
 
-**[operations.AcademicsearchqueryResponse](../../models/operations/academicsearchqueryresponse.md)**
+**[operations.InternetsearchResponse](../../models/operations/internetsearchresponse.md)**
 ### Errors
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4x-5xx          | */*             |
+| Error Object                              | Status Code                               | Content Type                              |
+| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| errors.InternetsearchResponseBody         | 400                                       | application/json                          |
+| errors.InternetsearchResponseResponseBody | 401                                       | application/json                          |
+| errors.SDKError                           | 4x-5xx                                    | */*                                       |

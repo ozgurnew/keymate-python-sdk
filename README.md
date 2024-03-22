@@ -37,7 +37,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.insertionplan(q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -51,28 +51,12 @@ if res.object is not None:
 
 ### [Keymateapi SDK](docs/sdks/keymateapi/README.md)
 
-* [insertionplan](docs/sdks/keymateapi/README.md#insertionplan) - Long term memory information addition plan, run this operation before adding anything to the keymate memory personal knowledge base before /upsert /upsertjson /upserttoUsersKnowledgebase /savetopkb /upsertToUsersKnowledgeBase operations. 
-* [gptsbrowse](docs/sdks/keymateapi/README.md#gptsbrowse) - Only fetch https://memory.keymate.ai URLs with this operation. For other URLs use browseurl operation, never run this more than twice
-* [internetsearch](docs/sdks/keymateapi/README.md#internetsearch) - For Search Browsing always start with this operation. Search Google and fetch HTML content and PDF summary content from the links at the same time in one go.
+* [upsert](docs/sdks/keymateapi/README.md#upsert) - Inserts record to Keymate Memory.
+* [query](docs/sdks/keymateapi/README.md#query) - Queries the user's Keymate Memory.
 * [browseurl](docs/sdks/keymateapi/README.md#browseurl) - The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
-* [metadatakb](docs/sdks/keymateapi/README.md#metadatakb) - Allows you to answer introductory info about users Keymate memory.
-* [listpdfs](docs/sdks/keymateapi/README.md#listpdfs) - Lists pdf files uploaded by the user
-* [ultrafastsearch](docs/sdks/keymateapi/README.md#ultrafastsearch) - This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
-* [upsert](docs/sdks/keymateapi/README.md#upsert) - Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this. 
-* [insert](docs/sdks/keymateapi/README.md#insert) - Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this. 
-* [savetopkb](docs/sdks/keymateapi/README.md#savetopkb) - Long term memory addition operation, ALWAYS USE insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
-* [upsertjson](docs/sdks/keymateapi/README.md#upsertjson) - Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
-* [ulpdfload](docs/sdks/keymateapi/README.md#ulpdfload) - Redirect user to the given link in the response that will allow them to store and search their PDF file content
-* [list](docs/sdks/keymateapi/README.md#list) - Returns a message from the server about commands that can be run on the internetSearch KeyMate plugin.
-* [help](docs/sdks/keymateapi/README.md#help) - This command returns latest information about how to use internetSearch KeyMate Plugin
-* [query](docs/sdks/keymateapi/README.md#query) - Queries the user's Keymate Memory. 
-* [pkb](docs/sdks/keymateapi/README.md#pkb) - Queries the user's Keymate Memory. 
-* [pdfsearch](docs/sdks/keymateapi/README.md#pdfsearch) - Queries the user's Keymate Memory. 
-* [upsert_to_users_knowledge_base](docs/sdks/keymateapi/README.md#upsert_to_users_knowledge_base) - Long term memory, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation. Give data insertion plan to user and get confirmation before running this.
-* [query_users_knowledge_base](docs/sdks/keymateapi/README.md#query_users_knowledge_base) - Queries the user's Keymate Memory. 
-* [academicsearchdoi](docs/sdks/keymateapi/README.md#academicsearchdoi) - Allows user to chat with an academic paper by providing DOI
-* [hybrid](docs/sdks/keymateapi/README.md#hybrid) - Search Google and fetch HTML content and search content on personal Keymate Memory at the same time in one go.
-* [academicsearchquery](docs/sdks/keymateapi/README.md#academicsearchquery) - Allows assistant to search academic papers ultra fast by providing keywords
+* [browse](docs/sdks/keymateapi/README.md#browse) - Fetch any URLs without proxy it would probably fail on major websites but quicker than browseurl 
+* [gptsbrowse](docs/sdks/keymateapi/README.md#gptsbrowse) - Fetch memory.keymate.ai URLs
+* [internetsearch](docs/sdks/keymateapi/README.md#internetsearch) - Conduct an internet search
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Error Handling [errors] -->
@@ -80,26 +64,32 @@ if res.object is not None:
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or raise an error.  If Error objects are specified in your OpenAPI Spec, the SDK will raise the appropriate Error type.
 
-| Error Object                  | Status Code                   | Content Type                  |
-| ----------------------------- | ----------------------------- | ----------------------------- |
-| errors.GptsbrowseResponseBody | 400                           | application/json              |
-| errors.SDKError               | 4x-5xx                        | */*                           |
+| Error Object                 | Status Code                  | Content Type                 |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| errors.BrowseurlResponseBody | 400                          | application/json             |
+| errors.SDKError              | 4x-5xx                       | */*                          |
 
 ### Example
 
 ```python
 import keymateapi
-from keymateapi.models import errors
+from keymateapi.models import errors, operations
 
 s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+req = operations.BrowseurlRequest(
+    inputwindowwords='<value>',
+    q='https://agreeable-jumbo.net',
+    percentile='<value>',
+    numofpages='<value>',
+)
 
 res = None
 try:
-    res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='<value>', numofpages='<value>', paging='<value>')
-except errors.GptsbrowseResponseBody as e:
+    res = s.browseurl(req)
+except errors.BrowseurlResponseBody as e:
     # handle exception
     raise(e)
 except errors.SDKError as e:
@@ -122,7 +112,7 @@ You can override the default server globally by passing a server index to the `s
 
 | # | Server | Variables |
 | - | ------ | --------- |
-| 0 | `https://server.searchweb.keymate.ai` | None |
+| 0 | `https://searchweb.keymate.ai` | None |
 
 #### Example
 
@@ -135,7 +125,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.insertionplan(q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -151,12 +141,12 @@ The default server can also be overridden globally by passing a URL to the `serv
 import keymateapi
 
 s = keymateapi.Keymateapi(
-    server_url="https://server.searchweb.keymate.ai",
+    server_url="https://searchweb.keymate.ai",
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
 
-res = s.insertionplan(q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
@@ -201,7 +191,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.insertionplan(q='<value>')
+res = s.upsert(q='<value>')
 
 if res.object is not None:
     # handle response
