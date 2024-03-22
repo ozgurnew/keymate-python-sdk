@@ -9,13 +9,6 @@ from typing import Optional
 
 
 @dataclasses.dataclass
-class InsertionplanSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class InsertionplanRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""Data text to be embedded to personal Pinecone index knowledge base allow user to review and edit this after you run this endpoint"""

@@ -9,13 +9,6 @@ from typing import Any, List, Optional
 
 
 @dataclasses.dataclass
-class AcademicsearchquerySecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class AcademicsearchqueryRequest:
     query: str = dataclasses.field(metadata={'query_param': { 'field_name': 'query', 'style': 'form', 'explode': True }})
     r"""The search query keywords to find multiple academic papers semantically and in full text search way"""

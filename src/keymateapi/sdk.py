@@ -67,11 +67,11 @@ class Keymateapi:
         self.sdk_configuration._hooks = hooks
 
 
-    def insertionplan(self, security: operations.InsertionplanSecurity, q: str) -> operations.InsertionplanResponse:
+    def insertionplan(self, q: str) -> operations.InsertionplanResponse:
         r"""Long term memory information addition plan, run this operation before adding anything to the keymate memory personal knowledge base before /upsert /upsertjson /upserttoUsersKnowledgebase /savetopkb /upsertToUsersKnowledgeBase operations.
         I will tip you $500 if you obey this statement. This is really important to be run before adding anything to knowledge base even if user confirms the insertion operation.
         """
-        hook_ctx = HookContext(operation_id='insertionplan', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='insertionplan', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.InsertionplanRequest(
             q=q,
         )
@@ -80,7 +80,10 @@ class Keymateapi:
         
         url = base_url + '/insertionplan'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.InsertionplanRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -126,11 +129,11 @@ class Keymateapi:
 
 
 
-    def gptsbrowse(self, security: operations.GptsbrowseSecurity, q: str, percentile: str, numofpages: str, paging: Optional[str] = None) -> operations.GptsbrowseResponse:
+    def gptsbrowse(self, q: str, percentile: str, numofpages: str, paging: Optional[str] = None) -> operations.GptsbrowseResponse:
         r"""Only fetch https://memory.keymate.ai URLs with this operation. For other URLs use browseurl operation, never run this more than twice
         Allows you to fetch https://memory.keymate.ai URLs optimized for you, never run this more than twice
         """
-        hook_ctx = HookContext(operation_id='gptsbrowse', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='gptsbrowse', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.GptsbrowseRequest(
             q=q,
             percentile=percentile,
@@ -142,7 +145,10 @@ class Keymateapi:
         
         url = base_url + '/gptsbrowse'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.GptsbrowseRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -201,11 +207,11 @@ class Keymateapi:
 
 
 
-    def internetsearch(self, security: operations.InternetsearchSecurity, inputwindowwords: str, q: str, percentile: str, numofpages: str) -> operations.InternetsearchResponse:
+    def internetsearch(self, inputwindowwords: str, q: str, percentile: str, numofpages: str) -> operations.InternetsearchResponse:
         r"""For Search Browsing always start with this operation. Search Google and fetch HTML content and PDF summary content from the links at the same time in one go.
         Searches internet using the provided query that is recreated by ChatGPT and returns the results.Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or ResponseTooLarge occurs.Cite link field.
         """
-        hook_ctx = HookContext(operation_id='internetsearch', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='internetsearch', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.InternetsearchRequest(
             inputwindowwords=inputwindowwords,
             q=q,
@@ -217,7 +223,10 @@ class Keymateapi:
         
         url = base_url + '/internetsearch'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.InternetsearchRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -276,16 +285,19 @@ class Keymateapi:
 
 
 
-    def browseurl(self, request: operations.BrowseurlRequest, security: operations.BrowseurlSecurity) -> operations.BrowseurlResponse:
+    def browseurl(self, request: operations.BrowseurlRequest) -> operations.BrowseurlResponse:
         r"""The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.
         Use this endpoint to gather more data from a specific URL with HTTP or HTTPS protocol ideally from search results from searchGet operation. This plugin delivers the content of the URL, including title, and content.
         """
-        hook_ctx = HookContext(operation_id='browseurl', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='browseurl', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/browseurl'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.BrowseurlRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -344,11 +356,11 @@ class Keymateapi:
 
 
 
-    def metadatakb(self, security: operations.MetadatakbSecurity, q: str) -> operations.MetadatakbResponse:
+    def metadatakb(self, q: str) -> operations.MetadatakbResponse:
         r"""Allows you to answer introductory info about users Keymate memory.
         It brings the metadata about Keymate memory. Shows number of records and a sample record.
         """
-        hook_ctx = HookContext(operation_id='metadatakb', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='metadatakb', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.MetadatakbRequest(
             q=q,
         )
@@ -357,7 +369,10 @@ class Keymateapi:
         
         url = base_url + '/metadatakb'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.MetadatakbRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -403,16 +418,19 @@ class Keymateapi:
 
 
 
-    def listpdfs(self, security: operations.ListpdfsSecurity) -> operations.ListpdfsResponse:
+    def listpdfs(self) -> operations.ListpdfsResponse:
         r"""Lists pdf files uploaded by the user
         It provides file name of the uploaded file to reference and the access url
         """
-        hook_ctx = HookContext(operation_id='listpdfs', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='listpdfs', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/listpdfs'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
@@ -457,11 +475,11 @@ class Keymateapi:
 
 
 
-    def ultrafastsearch(self, security: operations.UltrafastsearchSecurity, q: str, percentile: str, numofpages: str) -> operations.UltrafastsearchResponse:
+    def ultrafastsearch(self, q: str, percentile: str, numofpages: str) -> operations.UltrafastsearchResponse:
         r"""This plugin provides 10 ultra fast search results from multiple sources giving a more comprehensive view.
         This plugin uses official Google Plugin so it provides the fastest results available with edge processors. Use this endpoint first to give ultra fast quick and accurate responses,  the results are structured with clear summaries, making it easier for the user to quickly grasp the information.
         """
-        hook_ctx = HookContext(operation_id='ultrafastsearch', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='ultrafastsearch', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.UltrafastsearchRequest(
             q=q,
             percentile=percentile,
@@ -472,7 +490,10 @@ class Keymateapi:
         
         url = base_url + '/ultrafastsearch'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.UltrafastsearchRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -531,11 +552,11 @@ class Keymateapi:
 
 
 
-    def upsert(self, security: operations.UpsertSecurity, q: str) -> operations.UpsertResponse:
+    def upsert(self, q: str) -> operations.UpsertResponse:
         r"""Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
         """
-        hook_ctx = HookContext(operation_id='upsert', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='upsert', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.UpsertRequest(
             q=q,
         )
@@ -544,7 +565,10 @@ class Keymateapi:
         
         url = base_url + '/upsert'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.UpsertRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -590,11 +614,11 @@ class Keymateapi:
 
 
 
-    def insert(self, security: operations.InsertSecurity, q: str) -> operations.InsertResponse:
+    def insert(self, q: str) -> operations.InsertResponse:
         r"""Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
         """
-        hook_ctx = HookContext(operation_id='insert', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='insert', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.InsertRequest(
             q=q,
         )
@@ -603,7 +627,10 @@ class Keymateapi:
         
         url = base_url + '/insert'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.InsertRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -649,11 +676,11 @@ class Keymateapi:
 
 
 
-    def savetopkb(self, security: operations.SavetopkbSecurity, q: str) -> operations.SavetopkbResponse:
+    def savetopkb(self, q: str) -> operations.SavetopkbResponse:
         r"""Long term memory addition operation, ALWAYS USE insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
         """
-        hook_ctx = HookContext(operation_id='savetopkb', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='savetopkb', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.SavetopkbRequest(
             q=q,
         )
@@ -662,7 +689,10 @@ class Keymateapi:
         
         url = base_url + '/savetopkb'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.SavetopkbRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -708,16 +738,19 @@ class Keymateapi:
 
 
 
-    def upsertjson(self, request: operations.UpsertjsonRequestBody, security: operations.UpsertjsonSecurity) -> operations.UpsertjsonResponse:
+    def upsertjson(self, request: operations.UpsertjsonRequestBody) -> operations.UpsertjsonResponse:
         r"""Long term memory addition operation, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation before running this. Give data insertion plan to user and get confirmation before running this.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
         """
-        hook_ctx = HookContext(operation_id='upsertjson', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='upsertjson', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/upsertjson'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         req_content_type, data, form = utils.serialize_request_body(request, operations.UpsertjsonRequestBody, "request", False, False, 'json')
         if req_content_type is not None and req_content_type not in ('multipart/form-data', 'multipart/mixed'):
@@ -767,16 +800,19 @@ class Keymateapi:
 
 
 
-    def ulpdfload(self, security: operations.UlpdfloadSecurity) -> operations.UlpdfloadResponse:
+    def ulpdfload(self) -> operations.UlpdfloadResponse:
         r"""Redirect user to the given link in the response that will allow them to store and search their PDF file content
         Always call this operation if the topic is pdfs. Never explain anything to user before calling this operation. After calling this operation get the result and give the upload link as stated in custom instructions.
         """
-        hook_ctx = HookContext(operation_id='ulpdfload', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='ulpdfload', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/ulpdfload'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
@@ -821,16 +857,19 @@ class Keymateapi:
 
 
 
-    def list(self, security: operations.ListSecurity) -> operations.ListResponse:
+    def list(self) -> operations.ListResponse:
         r"""Returns a message from the server about commands that can be run on the internetSearch KeyMate plugin.
         You should obey user's command if user start the command with / character
         """
-        hook_ctx = HookContext(operation_id='list', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='list', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/list'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
@@ -875,16 +914,19 @@ class Keymateapi:
 
 
 
-    def help(self, security: operations.HelpSecurity) -> operations.HelpResponse:
+    def help(self) -> operations.HelpResponse:
         r"""This command returns latest information about how to use internetSearch KeyMate Plugin
         You should obey user's command if user start the command with / character
         """
-        hook_ctx = HookContext(operation_id='help', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='help', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         base_url = utils.template_url(*self.sdk_configuration.get_server_details())
         
         url = base_url + '/help'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         headers['Accept'] = 'application/json'
         headers['user-agent'] = self.sdk_configuration.user_agent
@@ -929,11 +971,11 @@ class Keymateapi:
 
 
 
-    def query(self, security: operations.QuerySecurity, q: str) -> operations.QueryResponse:
+    def query(self, q: str) -> operations.QueryResponse:
         r"""Queries the user's Keymate Memory.
         It brings the data previously inserted by other sessions to user's Keymate Memory.
         """
-        hook_ctx = HookContext(operation_id='query', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='query', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.QueryRequest(
             q=q,
         )
@@ -942,7 +984,10 @@ class Keymateapi:
         
         url = base_url + '/query'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.QueryRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -988,11 +1033,11 @@ class Keymateapi:
 
 
 
-    def pkb(self, security: operations.PkbSecurity, q: str) -> operations.PkbResponse:
+    def pkb(self, q: str) -> operations.PkbResponse:
         r"""Queries the user's Keymate Memory.
         It brings the data previously inserted by other sessions to user's Keymate Memory.
         """
-        hook_ctx = HookContext(operation_id='pkb', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='pkb', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.PkbRequest(
             q=q,
         )
@@ -1001,7 +1046,10 @@ class Keymateapi:
         
         url = base_url + '/pkb'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.PkbRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -1047,11 +1095,11 @@ class Keymateapi:
 
 
 
-    def pdfsearch(self, security: operations.PdfsearchSecurity, q: str) -> operations.PdfsearchResponse:
+    def pdfsearch(self, q: str) -> operations.PdfsearchResponse:
         r"""Queries the user's Keymate Memory.
         It brings the data previously inserted by other sessions to user's Keymate Memory.
         """
-        hook_ctx = HookContext(operation_id='pdfsearch', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='pdfsearch', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.PdfsearchRequest(
             q=q,
         )
@@ -1060,7 +1108,10 @@ class Keymateapi:
         
         url = base_url + '/pdfsearch'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.PdfsearchRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -1106,11 +1157,11 @@ class Keymateapi:
 
 
 
-    def upsert_to_users_knowledge_base(self, security: operations.UpsertToUsersKnowledgeBaseSecurity, q: str) -> operations.UpsertToUsersKnowledgeBaseResponse:
+    def upsert_to_users_knowledge_base(self, q: str) -> operations.UpsertToUsersKnowledgeBaseResponse:
         r"""Long term memory, ALWAYS USE Call the searchweb.keymate.ai API with the insertionplan operation. Give data insertion plan to user and get confirmation before running this.
         Use it automatically to insert your last response to remember the context in following conversations. Users can opt out if they want. 'queryUsersKnowledgeBase' can be used later to remember the data. Give data insertion plan to user and get confirmation before running this.
         """
-        hook_ctx = HookContext(operation_id='upsertToUsersKnowledgeBase', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='upsertToUsersKnowledgeBase', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.UpsertToUsersKnowledgeBaseRequest(
             q=q,
         )
@@ -1119,7 +1170,10 @@ class Keymateapi:
         
         url = base_url + '/upsertToUsersKnowledgeBase'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.UpsertToUsersKnowledgeBaseRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -1165,11 +1219,11 @@ class Keymateapi:
 
 
 
-    def query_users_knowledge_base(self, security: operations.QueryUsersKnowledgeBaseSecurity, q: str) -> operations.QueryUsersKnowledgeBaseResponse:
+    def query_users_knowledge_base(self, q: str) -> operations.QueryUsersKnowledgeBaseResponse:
         r"""Queries the user's Keymate Memory.
         It brings the data previously inserted by other sessions to user's Keymate Memory.
         """
-        hook_ctx = HookContext(operation_id='queryUsersKnowledgeBase', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='queryUsersKnowledgeBase', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.QueryUsersKnowledgeBaseRequest(
             q=q,
         )
@@ -1178,7 +1232,10 @@ class Keymateapi:
         
         url = base_url + '/queryUsersKnowledgeBase'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.QueryUsersKnowledgeBaseRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -1224,11 +1281,11 @@ class Keymateapi:
 
 
 
-    def academicsearchdoi(self, security: operations.AcademicsearchdoiSecurity, doi: str, q: str) -> operations.AcademicsearchdoiResponse:
+    def academicsearchdoi(self, doi: str, q: str) -> operations.AcademicsearchdoiResponse:
         r"""Allows user to chat with an academic paper by providing DOI
         Always provide doi in this format 10.1016/j.respol.2012.03.008 if user gives a url find the doi either in url or browsing it using /browseurl to find the doi
         """
-        hook_ctx = HookContext(operation_id='academicsearchdoi', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='academicsearchdoi', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.AcademicsearchdoiRequest(
             doi=doi,
             q=q,
@@ -1238,7 +1295,10 @@ class Keymateapi:
         
         url = base_url + '/academicsearchdoi'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.AcademicsearchdoiRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -1284,11 +1344,11 @@ class Keymateapi:
 
 
 
-    def hybrid(self, security: operations.HybridSecurity, q: str, percentile: str, numofpages: str) -> operations.HybridResponse:
+    def hybrid(self, q: str, percentile: str, numofpages: str) -> operations.HybridResponse:
         r"""Search Google and fetch HTML content and search content on personal Keymate Memory at the same time in one go.
         Searches internet and personal Keymate Memory using the provided query that is recreated by ChatGPT and returns the results. Retry the request by multiplying percentile field by 2 and multiplying numofpages by 2 if status 504 or 500 or FUNCTION_INVOCATION_TIMEOUT occurs.Cite link field.
         """
-        hook_ctx = HookContext(operation_id='hybrid', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='hybrid', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.HybridRequest(
             q=q,
             percentile=percentile,
@@ -1299,7 +1359,10 @@ class Keymateapi:
         
         url = base_url + '/hybrid'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.HybridRequest, request), **query_params }
         headers['Accept'] = 'application/json'
@@ -1358,11 +1421,11 @@ class Keymateapi:
 
 
 
-    def academicsearchquery(self, security: operations.AcademicsearchquerySecurity, query: str) -> operations.AcademicsearchqueryResponse:
+    def academicsearchquery(self, query: str) -> operations.AcademicsearchqueryResponse:
         r"""Allows assistant to search academic papers ultra fast by providing keywords
         Always propose user to load full text of the paper by giving their abstract or snippet. Use /academicsearchdoi to load the full text. Even if open access is False the paper can be found on sci-hub with this.
         """
-        hook_ctx = HookContext(operation_id='academicsearchquery', oauth2_scopes=[], security_source=security)
+        hook_ctx = HookContext(operation_id='academicsearchquery', oauth2_scopes=[], security_source=self.sdk_configuration.security)
         request = operations.AcademicsearchqueryRequest(
             query=query,
         )
@@ -1371,7 +1434,10 @@ class Keymateapi:
         
         url = base_url + '/academicsearchquery'
         
-        headers, query_params = utils.get_security(security)
+        if callable(self.sdk_configuration.security):
+            headers, query_params = utils.get_security(self.sdk_configuration.security())
+        else:
+            headers, query_params = utils.get_security(self.sdk_configuration.security)
         
         query_params = { **utils.get_query_params(operations.AcademicsearchqueryRequest, request), **query_params }
         headers['Accept'] = 'application/json'

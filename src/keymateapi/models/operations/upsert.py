@@ -9,13 +9,6 @@ from typing import Optional
 
 
 @dataclasses.dataclass
-class UpsertSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class UpsertRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""Data text to be embedded to personal Pinecone index"""

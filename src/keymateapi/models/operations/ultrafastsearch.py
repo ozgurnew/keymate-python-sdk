@@ -9,13 +9,6 @@ from typing import List, Optional
 
 
 @dataclasses.dataclass
-class UltrafastsearchSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class UltrafastsearchRequest:
     q: str = dataclasses.field(metadata={'query_param': { 'field_name': 'q', 'style': 'form', 'explode': True }})
     r"""URL of the website."""

@@ -9,13 +9,6 @@ from typing import List, Optional
 
 
 @dataclasses.dataclass
-class InternetsearchSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class InternetsearchRequest:
     inputwindowwords: str = dataclasses.field(metadata={'query_param': { 'field_name': 'inputwindowwords', 'style': 'form', 'explode': True }})
     r"""Set it as '8000' first if responsetoolarge occurs reduce it to 1000."""

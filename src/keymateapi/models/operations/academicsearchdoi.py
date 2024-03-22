@@ -9,13 +9,6 @@ from typing import Any, List, Optional
 
 
 @dataclasses.dataclass
-class AcademicsearchdoiSecurity:
-    bearer_auth: str = dataclasses.field(metadata={'security': { 'scheme': True, 'type': 'http', 'sub_type': 'bearer', 'field_name': 'Authorization' }})
-    
-
-
-
-@dataclasses.dataclass
 class AcademicsearchdoiRequest:
     doi: str = dataclasses.field(metadata={'query_param': { 'field_name': 'doi', 'style': 'form', 'explode': True }})
     r"""The doi of the academic paper user wants to chat with or ground asisstant responses. Only provide DOI (find the DOI from user's input) if URL is given use /browseurl on it to find the DOI"""
