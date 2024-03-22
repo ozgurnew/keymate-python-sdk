@@ -1,6 +1,6 @@
-# InternetsearchResponseBody
+# BrowseResponseResponseBody
 
-Bad request error due to missing or incorrect query parameters.
+Unauthorized access due to missing or invalid authorization details.
 
 
 ## Fields
@@ -8,4 +8,4 @@ Bad request error due to missing or incorrect query parameters.
 | Field                                                              | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
 | `http_meta`                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |
-| `error`                                                            | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | N/A                                                                | No query provided                                                  |
+| `error`                                                            | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | N/A                                                                | Missing Authorization header or unsupported authorization type     |

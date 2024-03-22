@@ -1,4 +1,4 @@
-# InternetsearchResponseResponseBody
+# BrowseResponseResponseBody
 
 Generic or unexpected error.
 

@@ -11,7 +11,7 @@ from typing import Callable, Dict, Tuple, Union
 
 
 SERVERS = [
-    'https://server.searchweb.keymate.ai',
+    'https://searchweb.keymate.ai',
 ]
 """Contains the list of servers available to the SDK"""
 
@@ -22,10 +22,10 @@ class SDKConfiguration:
     server_url: str = ''
     server_idx: int = 0
     language: str = 'python'
-    openapi_doc_version: str = '1.0.1'
-    sdk_version: str = '0.1.1'
+    openapi_doc_version: str = '1.0.2'
+    sdk_version: str = '0.2.0'
     gen_version: str = '2.286.7'
-    user_agent: str = 'speakeasy-sdk/python 0.1.1 2.286.7 1.0.1 keymateapi'
+    user_agent: str = 'speakeasy-sdk/python 0.2.0 2.286.7 1.0.2 keymateapi'
     retry_config: RetryConfig = None
     _hooks: SDKHooks = None
 

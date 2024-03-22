@@ -11,11 +11,23 @@ from typing import Optional
 @dataclass_json(undefined=Undefined.EXCLUDE)
 
 @dataclasses.dataclass
-class GptsbrowseResponseBody(Exception):
-    r"""Bad request"""
+class GptsbrowseResponseResponseBody(Exception):
+    r"""Unauthorized access due to missing or invalid authorization details."""
     http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
-    r"""Error message"""
+    
+
+    def __str__(self) -> str:
+        return utils.marshal_json(self, type(self))
+
+
+@dataclass_json(undefined=Undefined.EXCLUDE)
+
+@dataclasses.dataclass
+class GptsbrowseResponseBody(Exception):
+    r"""Bad request error due to missing or incorrect query parameters."""
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
+    error: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('error'), 'exclude': lambda f: f is None }})
     
 
     def __str__(self) -> str:

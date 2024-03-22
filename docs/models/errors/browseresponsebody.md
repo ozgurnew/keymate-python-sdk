@@ -1,4 +1,4 @@
-# InternetsearchResponseBody
+# BrowseResponseBody
 
 Bad request error due to missing or incorrect query parameters.
 
