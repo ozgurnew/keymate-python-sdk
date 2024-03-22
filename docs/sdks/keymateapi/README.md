@@ -108,7 +108,7 @@ s = keymateapi.Keymateapi(
 
 req = operations.BrowseurlRequest(
     inputwindowwords='<value>',
-    q='https://agreeable-jumbo.net',
+    q='https://news.ycombinator.com',
     percentile='<value>',
     numofpages='<value>',
 )
@@ -237,7 +237,7 @@ s = keymateapi.Keymateapi(
 )
 
 
-res = s.ultrafastsearch(q='https://unfortunate-forearm.info', percentile='<value>', numofpages='<value>')
+res = s.ultrafastsearch(q='bitcoin', percentile='<value>', numofpages='<value>')
 
 if res.two_hundred_application_json_object is not None:
     # handle response
