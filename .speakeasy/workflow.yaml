@@ -9,10 +9,13 @@ sources:
     openapi-developers-final:
         inputs:
             - location: openapi.json
+    openapi-developers-final-10:
+        inputs:
+            - location: openapi.json
 targets:
     first-target:
         target: python
-        source: openapi-developers-final
+        source: openapi-developers-final-10
         publish:
             pypi:
                 token: $pypi_token
