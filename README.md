@@ -7,12 +7,6 @@
 ```bash
 pip install keymateapi
 ```
-
-If you previously installed keymateapi please uninstall and install again
-```bash
-pip uninstall keymateapi
-pip install keymateapi
-```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
