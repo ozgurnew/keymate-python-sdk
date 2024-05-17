@@ -113,7 +113,7 @@
     }
   }
 },
-    "/browseurl": {
+     "/browseurl": {
       "get": {
         "operationId": "browseurl",
         "summary": "The plugin enables user to conduct web browsing by extracting the text content of a specified URL. It will generate title and content.",
@@ -209,6 +209,12 @@
                     "rules": "Follow the instructions provided"
                   }
                 }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Text response example"
+                }
               }
             }
           },
@@ -246,6 +252,12 @@
                   "example": {
                     "error": "Error fetching search results"
                   }
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Default error message in text format"
                 }
               }
             }
