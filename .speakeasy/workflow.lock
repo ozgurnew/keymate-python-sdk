@@ -1,0 +1,50 @@
+speakeasyVersion: 1.293.1
+sources:
+    openapi-developers-final-13:
+        sourceNamespace: openapi-developers-final-13
+        sourceRevisionDigest: sha256:97c08752686cb8cb84008ad8f5a2350ce39e7b14ed49374f20c468a3f0aa18c7
+        sourceBlobDigest: sha256:012eccb202b59b939777ccb6aba050bbc5b426d6d30282d5c60f91f508a79217
+        tags:
+            - latest
+            - main
+targets:
+    first-target:
+        source: openapi-developers-final-13
+        sourceNamespace: openapi-developers-final-13
+        sourceRevisionDigest: sha256:97c08752686cb8cb84008ad8f5a2350ce39e7b14ed49374f20c468a3f0aa18c7
+        sourceBlobDigest: sha256:012eccb202b59b939777ccb6aba050bbc5b426d6d30282d5c60f91f508a79217
+        outLocation: /github/workspace/repo
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        openapi:
+            inputs:
+                - location: openapi.json
+        openapi-developers:
+            inputs:
+                - location: openapi.json
+        openapi-developers-final:
+            inputs:
+                - location: openapi.json
+        openapi-developers-final-10:
+            inputs:
+                - location: openapi.json
+        openapi-developers-final-11:
+            inputs:
+                - location: openapi.json
+        openapi-developers-final-12:
+            inputs:
+                - location: openapi.json
+        openapi-developers-final-13:
+            inputs:
+                - location: openapi.json
+            registry:
+                location: registry.speakeasyapi.dev/keymatelast/keymatelast/openapi-developers-final-13
+    targets:
+        first-target:
+            target: python
+            source: openapi-developers-final-13
+            publish:
+                pypi:
+                    token: $pypi_token
