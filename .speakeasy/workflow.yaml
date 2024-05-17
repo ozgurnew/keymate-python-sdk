@@ -1,4 +1,5 @@
 workflowVersion: 1.0.0
+speakeasyVersion: latest
 sources:
     openapi:
         inputs:
@@ -21,6 +22,8 @@ sources:
     openapi-developers-final-13:
         inputs:
             - location: openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/keymatelast/keymatelast/openapi-developers-final-13
 targets:
     first-target:
         target: python

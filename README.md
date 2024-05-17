@@ -7,12 +7,6 @@
 ```bash
 pip install keymateapi
 ```
-
-If you previously installed keymateapi please uninstall and install again
-```bash
-pip uninstall keymateapi
-pip install keymateapi
-```
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
@@ -27,8 +21,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
-
-res = s.upsert(q='<value>')
+res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
     # handle response
@@ -60,7 +53,7 @@ Handling errors in this SDK should largely match your expectations.  All operati
 | Error Object                 | Status Code                  | Content Type                 |
 | ---------------------------- | ---------------------------- | ---------------------------- |
 | errors.BrowseurlResponseBody | 400                          | application/json             |
-| errors.SDKError              | 4x-5xx                       | */*                          |
+| errors.SDKError              | 4xx-5xx                      | */*                          |
 
 ### Example
 
@@ -72,16 +65,15 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
-req = operations.BrowseurlRequest(
-    inputwindowwords='<value>',
-    q='https://agreeable-jumbo.net',
-    percentile='<value>',
-    numofpages='<value>',
-)
-
 res = None
 try:
-    res = s.browseurl(req)
+    res = s.browseurl(request=operations.BrowseurlRequest(
+    inputwindowwords='10000',
+    q='https://keymate.ai',
+    percentile='1',
+    numofpages='1',
+    paging='1',
+))
 except errors.BrowseurlResponseBody as e:
     # handle exception
     raise(e)
@@ -117,8 +109,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
-
-res = s.upsert(q='<value>')
+res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
     # handle response
@@ -138,8 +129,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
-
-res = s.upsert(q='<value>')
+res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
     # handle response
@@ -160,7 +150,7 @@ import requests
 
 http_client = requests.Session()
 http_client.headers.update({'x-custom-header': 'someValue'})
-s = keymateapi.Keymateapi(client: http_client)
+s = keymateapi.Keymateapi(client=http_client)
 ```
 <!-- End Custom HTTP Client [http-client] -->
 
@@ -183,8 +173,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
-
-res = s.upsert(q='<value>')
+res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
     # handle response
