@@ -54,9 +54,10 @@ class UltrafastsearchResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class UltrafastsearchResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     two_hundred_application_json_object: Optional[UltrafastsearchResponseBody] = dataclasses.field(default=None)
     r"""Successful operation"""
     default_application_json_object: Optional[UltrafastsearchResponseResponseBody] = dataclasses.field(default=None)

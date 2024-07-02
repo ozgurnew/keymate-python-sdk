@@ -21,6 +21,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+
 res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
@@ -74,6 +75,7 @@ try:
     numofpages='1',
     paging='1',
 ))
+
 except errors.BrowseurlResponseBody as e:
     # handle exception
     raise(e)
@@ -109,6 +111,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+
 res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
@@ -128,6 +131,7 @@ s = keymateapi.Keymateapi(
     server_url="https://server.searchweb.keymate.ai",
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
+
 
 res = s.upsert(q='I prefer Costa over Starbucks.')
 
@@ -172,6 +176,7 @@ import keymateapi
 s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
+
 
 res = s.upsert(q='I prefer Costa over Starbucks.')
 

@@ -29,6 +29,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+
 res = s.upsert(q='I prefer Costa over Starbucks.')
 
 if res.object is not None:
@@ -65,6 +66,7 @@ import keymateapi
 s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
+
 
 res = s.query(q='https://keymate.ai')
 
@@ -103,6 +105,7 @@ from keymateapi.models import operations
 s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
+
 
 res = s.browseurl(request=operations.BrowseurlRequest(
     inputwindowwords='10000',
@@ -148,6 +151,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+
 res = s.browse(q='http://impressive-silence.info', percentile='1', numofpages='1', paging='1')
 
 if res.two_hundred_application_json_object is not None:
@@ -190,6 +194,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+
 res = s.search(q='http://fake-flume.name', percentile='1', numofpages='1')
 
 if res.two_hundred_application_json_object is not None:
@@ -231,6 +236,7 @@ s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
 
+
 res = s.ultrafastsearch(q='https://keymate.ai', percentile='100', numofpages='10')
 
 if res.two_hundred_application_json_object is not None:
@@ -270,6 +276,7 @@ import keymateapi
 s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
+
 
 res = s.gptsbrowse(q='http://puzzled-advertisement.com', percentile='1', numofpages='1', paging='1')
 
@@ -312,6 +319,7 @@ import keymateapi
 s = keymateapi.Keymateapi(
     bearer_auth="<YOUR_BEARER_TOKEN_HERE>",
 )
+
 
 res = s.internetsearch(inputwindowwords='8000', q='python', percentile='1', numofpages='6')
 

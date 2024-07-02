@@ -44,9 +44,10 @@ class GptsbrowseResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class GptsbrowseResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     two_hundred_application_json_object: Optional[GptsbrowseResponseBody] = dataclasses.field(default=None)
     r"""Successful operation. Returns fetched results along with applicable rules."""
     default_application_json_object: Optional[GptsbrowseResponseResponseBody] = dataclasses.field(default=None)

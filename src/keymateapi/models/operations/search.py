@@ -42,9 +42,10 @@ class SearchResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class SearchResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     two_hundred_application_json_object: Optional[SearchResponseBody] = dataclasses.field(default=None)
     r"""Successful operation. Returns fetched results along with applicable rules."""
     default_application_json_object: Optional[SearchResponseResponseBody] = dataclasses.field(default=None)

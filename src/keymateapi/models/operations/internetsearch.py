@@ -36,7 +36,6 @@ class InternetsearchResponseResponseBody:
 @dataclasses.dataclass
 class InternetsearchResponseBody:
     r"""Successful search operation. Returns data based on query and user's plan."""
-    UNSET='__SPEAKEASY_UNSET__'
     currentkeymateuser: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('currentkeymateuser'), 'exclude': lambda f: f is None }})
     notice_for_human: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('noticeForHuman'), 'exclude': lambda f: f is None }})
     results: Optional[List[components_searchresultitem.SearchResultItem]] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('results'), 'exclude': lambda f: f is None }})
@@ -47,9 +46,10 @@ class InternetsearchResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class InternetsearchResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     two_hundred_application_json_object: Optional[InternetsearchResponseBody] = dataclasses.field(default=None)
     r"""Successful search operation. Returns data based on query and user's plan."""
     default_application_json_object: Optional[InternetsearchResponseResponseBody] = dataclasses.field(default=None)

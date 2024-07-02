@@ -255,7 +255,7 @@ class Keymateapi:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.BrowseurlResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.BrowseurlResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -338,7 +338,7 @@ class Keymateapi:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.BrowseResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.BrowseResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -347,7 +347,7 @@ class Keymateapi:
         elif http_res.status_code == 401:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.BrowseResponseResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.BrowseResponseResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -426,7 +426,7 @@ class Keymateapi:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.SearchResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.SearchResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -435,7 +435,7 @@ class Keymateapi:
         elif http_res.status_code == 401:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.SearchResponseResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.SearchResponseResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -514,7 +514,7 @@ class Keymateapi:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.UltrafastsearchResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.UltrafastsearchResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -594,7 +594,7 @@ class Keymateapi:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.GptsbrowseResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.GptsbrowseResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -603,7 +603,7 @@ class Keymateapi:
         elif http_res.status_code == 401:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.GptsbrowseResponseResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.GptsbrowseResponseResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -683,7 +683,7 @@ class Keymateapi:
         elif http_res.status_code == 400:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.InternetsearchResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.InternetsearchResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
@@ -692,7 +692,7 @@ class Keymateapi:
         elif http_res.status_code == 401:
             # pylint: disable=no-else-return
             if utils.match_content_type(http_res.headers.get('Content-Type') or '', 'application/json'):                
-                out = utils.unmarshal_json(http_res.text, errors.InternetsearchResponseResponseBody)
+                out = utils.unmarshal_json(http_res.text, errors.InternetsearchResponseResponseBody, infer_missing=True)
                 out.http_meta = components.HTTPMetadata(request=req, response=http_res)
                 raise out
             else:
