@@ -34,7 +34,6 @@ class BrowseResponseResponseBody:
 @dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class Results:
-    UNSET='__SPEAKEASY_UNSET__'
     title: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('title'), 'exclude': lambda f: f is None }})
     r"""The title of the search result"""
     link: Optional[str] = dataclasses.field(default=None, metadata={'dataclasses_json': { 'letter_case': utils.get_field_name('link'), 'exclude': lambda f: f is None }})
@@ -60,9 +59,10 @@ class BrowseResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class BrowseResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     two_hundred_application_json_object: Optional[BrowseResponseBody] = dataclasses.field(default=None)
     r"""Successful operation. Returns fetched results along with applicable rules."""
     default_application_json_object: Optional[BrowseResponseResponseBody] = dataclasses.field(default=None)

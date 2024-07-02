@@ -48,9 +48,10 @@ class BrowseurlResponseBody:
 
 
 
+@dataclass_json(undefined=Undefined.EXCLUDE)
 @dataclasses.dataclass
 class BrowseurlResponse:
-    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field()
+    http_meta: components_httpmetadata.HTTPMetadata = dataclasses.field(metadata={'dataclasses_json': { 'exclude': lambda f: True }})
     two_hundred_application_json_object: Optional[BrowseurlResponseBody] = dataclasses.field(default=None)
     r"""Successful operation"""
     two_hundred_text_plain_res: Optional[str] = dataclasses.field(default=None)
